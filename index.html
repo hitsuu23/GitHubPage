@@ -116,7 +116,7 @@
 <body>
     <div class="video-background">
         <!-- Use JavaScript to change the video URL on each refresh -->
-        <iframe src="" id="video-background" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe id="video-background" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     <div class="sidebar">
         <h1>The Bit Head</h1>
@@ -127,7 +127,6 @@
     <div class="content">
         <!-- Main Content -->
         <h1>Welcome to The Bit Head</h1>
-        <p>Explore the depths of the digital world.</p>
     </div>
     <div class="footer">
         <p>&copy; 2024 Bit Head | <a href="https://github.com/hitsuu23" target="_blank" style="color: #0f0;">GitHub</a></p>
@@ -135,12 +134,13 @@
     <script>
         // List of video URLs
         const videoUrls = [
-            "https://www.youtube.com/embed/WW-9TcDTKa8?autoplay=1&loop=1&playlist=WW-9TcDTKa8&mute=1&controls=0",
-            "https://www.youtube.com/embed/videoseries?list=PLsLJRBCe_4RZJ1BS-30UCwI5Og5Jl2zh2&autoplay=1&loop=1&mute=1&controls=0",
-            "https://www.youtube.com/embed/fYQmIO9U2Ow?autoplay=1&loop=1&playlist=fYQmIO9U2Ow&mute=1&controls=0",
-            "https://www.youtube.com/embed/7HQ_-eWXyPI?autoplay=1&loop=1&playlist=7HQ_-eWXyPI&mute=1&controls=0",
-            "https://www.youtube.com/embed/WW-9TcDTKa8?autoplay=1&loop=1&playlist=WW-9TcDTKa8&mute=1&controls=0",
-            "https://www.youtube.com/embed/videoseries?list=PLsLJRBCe_4RZJ1BS-30UCwI5Og5Jl2zh2&autoplay=1&loop=1&mute=1&controls=0"
+            "https://www.youtube.com/embed/WW-9TcDTKa8?autoplay=1&mute=1&controls=0&loop=1&playlist=WW-9TcDTKa8",
+            "https://www.youtube.com/embed/fYQmIO9U2Ow?autoplay=1&mute=1&controls=0&loop=1&playlist=fYQmIO9U2Ow",
+            "https://www.youtube.com/embed/7HQ_-eWXyPI?autoplay=1&mute=1&controls=0&loop=1&playlist=7HQ_-eWXyPI",
+            "https://www.youtube.com/embed/WW-9TcDTKa8?autoplay=1&mute=1&controls=0&loop=1&playlist=WW-9TcDTKa8",
+            "https://www.youtube.com/embed/videoseries?list=PLsLJRBCe_4RZJ1BS-30UCwI5Og5Jl2zh2&autoplay=1&mute=1&controls=0",
+            "https://www.youtube.com/embed/WW-9TcDTKa8?autoplay=1&mute=1&controls=0&loop=1&playlist=WW-9TcDTKa8",
+            "https://www.youtube.com/embed/videoseries?list=PLsLJRBCe_4RZJ1BS-30UCwI5Og5Jl2zh2&autoplay=1&mute=1&controls=0"
         ];
 
         // Get a random video from the list
