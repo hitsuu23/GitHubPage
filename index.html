@@ -94,6 +94,36 @@
             border-bottom: none;
         }
 
+        .forum form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .forum form input, .forum form textarea, .forum form button {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .forum form input, .forum form textarea {
+            border: 1px solid #c0c0ff;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #c0c0ff;
+        }
+
+        .forum form button {
+            background-color: #c0c0ff;
+            color: #111;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .forum form button:hover {
+            background-color: #9b30ff;
+        }
+
         .controls {
             position: absolute;
             bottom: 20px;
@@ -156,8 +186,14 @@
     </div>
     <div class="forum">
         <h2>Forum</h2>
+        <form id="post-form">
+            <input type="text" id="post-title" placeholder="Title" required>
+            <textarea id="post-content" placeholder="Content" required></textarea>
+            <button type="submit">Post</button>
+        </form>
         <div id="forum-posts">
             <!-- Forum posts will go here -->
+            <!-- Sample posts -->
             <div class="post">
                 <h3>Post Title 1</h3>
                 <p>This is a sample post content for Post Title 1.</p>
@@ -166,11 +202,11 @@
                 <h3>Post Title 2</h3>
                 <p>This is a sample post content for Post Title 2.</p>
             </div>
-            <!-- Add more posts as needed -->
         </div>
     </div>
 
     <script>
+        // Load the IFrame Player API code asynchronously
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -237,6 +273,23 @@
         function playNextVideo() {
             player.loadVideoById(getRandomVideoId());
         }
+
+        // Handle forum post submission
+        document.getElementById('post-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var title = document.getElementById('post-title').value;
+            var content = document.getElementById('post-content').value;
+
+            var postElement = document.createElement('div');
+            postElement.className = 'post';
+            postElement.innerHTML = '<h3>' + title + '</h3><p>' + content + '</p>';
+
+            document.getElementById('forum-posts').appendChild(postElement);
+
+            document.getElementById('post-title').value = '';
+            document.getElementById('post-content').value = '';
+        });
     </script>
 </body>
 </html>
