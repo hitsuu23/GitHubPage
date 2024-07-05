@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TheBitHeads</title>
-    <link rel="icon" href="https://example.com/favicon.ico"> <!-- Add your own favicon here -->
+    <link rel="icon" href="https://example.com/favicon.ico"> <!-- Replace with your own favicon -->
+    <link href="https://fonts.googleapis.com/css2?family=Old+English+Text+MT&display=swap" rel="stylesheet"> <!-- Link to Old English Text MT font -->
     <style>
+        /* Your CSS styles */
         /* Overall Body Styles */
         body {
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Old English Text MT', 'Blackletter', serif; /* Specify the desired font */
             margin: 0;
             padding: 0;
             background-color: #000;
@@ -68,7 +70,7 @@
             z-index: 2;
         }
 
-        .volume-control, .skip-button, .pause-button {
+        .volume-control, .skip-button {
             width: 200px;
             padding: 10px;
             background: #111;
@@ -98,13 +100,8 @@
             border-radius: 50%;
         }
 
-        .skip-button:hover, .pause-button:hover {
+        .skip-button:hover {
             background: #9b30ff; /* Lighter purple on hover */
-        }
-
-        .pause-button {
-            background: #111;
-            border: 2px solid #c0c0ff; /* Purple border */
         }
     </style>
 </head>
@@ -118,7 +115,6 @@
     <div class="controls">
         <input type="range" class="volume-control" min="0" max="100" value="50" id="volume-slider">
         <button class="skip-button" id="skip-button">Skip</button>
-        <button class="pause-button" id="pause-button">Pause</button>
     </div>
 
     <script>
@@ -129,56 +125,35 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
-        var videos = [
-            "gdEe_lXsULg", // $uicideboy$
-            "ZwGn7CDhiGs", // $uicideboy$
-            "ZQRsDx11pCg", // $uicideboy$
-            "DbSfsdS7lkw", // TeamSESH
-            "azoQ9gSJ-60", // TeamSESH
-            "1kp4Tnv8B7E", // TeamSESH
-            "H1SguK7rSTM", // BLACKKRAY
-            "4eNxIZrq9U4", // $uicideboy$
-            "WYS2PMgCfRE", // LilPeep-Topic
-            "SV4k2XNS0tE", // Fuffnite
-            "S_KWsUR08P8", // LilPeep
-            "hWp7IjONZCM", // LilPeep
-            "x65yxfRo6rM", // LilPeep
-            "I4jh4ojwSoM", // TeamSESH
-            "EcImU26ThN4", // TeamSESH
-            "-P9U7nDbr0A", // TeamSESH
-            "Cqfrffq81sU", // TeamSESH
-            "csa8ry5sgIs", // TeamSESH
-            "WvV5TbJc9tQ", // LilPeep
-            "8erv9o7A7mg", // $uicideboy$
-            "uuy9oJmfFK8", // $uicideboy$
-            "e0ACFFptjj0", // TeamSESH
-            "zo9XxLs9sHI", // Playlist 1
-            "gH2iFwB95eY", // Playlist 1
-            "vO-xS0Ilgbo", // Playlist 1
-            "s5tVXRM2CqI", // Playlist 1
-            "9SO8z7RUO0s", // Playlist 1
-            "VbT-m3TtBEw", // Playlist 1
-            "YKNL7LXhl0s", // Playlist 1
-            "O-f_8lzM4D0", // Playlist 1
-            "pPaQKnFJxsw", // Playlist 1
-            "BGZ3F0_O1gY", // Playlist 1
-            "IhG7Uk8EvzA", // Playlist 2
-            "7Wy7sWxwF70", // Playlist 2
-            "5X_2OoAd1D0", // Playlist 2
-            "l5DgfsaF5_0", // Playlist 2
-            "tD83Xxxt5gE", // Playlist 2
-            "A0fzAA6JQmE", // Playlist 2
-            "nPzGWZpizWk", // Playlist 2
-            "PH0vHH5q3OQ", // Playlist 2
-            "pGlxtrGmfJY", // Playlist 2
-            "xwJ20lRtJr4"  // Playlist 2
-        ];
-
         function onYouTubeIframeAPIReady() {
-            // Shuffle the videos array
-            videos = shuffleArray(videos);
+            // Array of video URLs
+            const videos = [
+                "DbSfsdS7lkw",
+                "azoQ9gSJ-60",
+                "1kp4Tnv8B7E",
+                "H1SguK7rSTM",
+                "4eNxIZrq9U4",
+                "WYS2PMgCfRE",
+                "SV4k2XNS0tE",
+                "S_KWsUR08P8",
+                "hWp7IjONZCM",
+                "x65yxfRo6rM",
+                "I4jh4ojwSoM",
+                "EcImU26ThN4",
+                "-P9U7nDbr0A",
+                "Cqfrffq81sU",
+                "csa8ry5sgIs",
+                "8erv9o7A7mg",
+                "uuy9oJmfFK8",
+                "e0ACFFptjj0"
+            ];
 
-            // Create the YouTube player
+            // Function to get a random video URL
+            function getRandomVideo() {
+                const randomIndex = Math.floor(Math.random() * videos.length);
+                return videos[randomIndex];
+            }
+
             player = new YT.Player('player', {
                 height: '100%',
                 width: '100%',
@@ -187,60 +162,29 @@
                     'autoplay': 1,
                     'controls': 0,
                     'loop': 1,
-                    'playlist': videos.join(','), // Loop through all videos
-                    'rel': 0,
-                    'showinfo': 0
+                    'playlist': videos.join(',') // Loop through the entire playlist
                 },
                 events: {
-                    'onStateChange': onPlayerStateChange
+                    'onReady': onPlayerReady
                 }
             });
+        }
 
-            // Volume Control
-            var volumeSlider = document.getElementById('volume-slider');
-            volumeSlider.addEventListener('input', function () {
-                var volume = volumeSlider.value;
-                player.setVolume(volume);
+        function onPlayerReady(event) {
+            // Adjust the volume
+            const volumeSlider = document.getElementById('volume-slider');
+            volumeSlider.addEventListener('input', function() {
+                player.setVolume(volumeSlider.value);
             });
 
-            // Set initial volume slider value
-            volumeSlider.value = 50;
+            // Skip to the next video
+            document.getElementById('skip-button').addEventListener('click', function() {
+                player.loadVideoById(getRandomVideo()); // Load a new random video
+            });
+
+            // Initial volume set
+            player.setVolume(volumeSlider.value);
         }
-
-        function onPlayerStateChange(event) {
-            if (event.data == YT.PlayerState.ENDED) {
-                player.loadVideoById(getRandomVideo()); // Load a new random video when the current one ends
-            }
-        }
-
-        function getRandomVideo() {
-            var randomIndex = Math.floor(Math.random() * videos.length);
-            return videos[randomIndex];
-        }
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        // Skip Button Event Listener
-        document.getElementById('skip-button').addEventListener('click', function () {
-            player.loadVideoById(getRandomVideo());
-        });
-
-        // Pause/Play Button Event Listener
-        document.getElementById('pause-button').addEventListener('click', function () {
-            if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-                player.pauseVideo();
-                this.textContent = 'Play';
-            } else {
-                player.playVideo();
-                this.textContent = 'Pause';
-            }
-        });
     </script>
 </body>
 </html>
