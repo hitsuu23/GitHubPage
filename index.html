@@ -162,19 +162,25 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
-        function onYouTubeIframeAPIReady() {
-            const playlist1 = "PLQk97lMIO2EWhBCNqpEeeNZBWTkAmcJjX";
-            const playlist2 = "PLc5lU5C6ozXBR8BvY83kF8y4z8moSaa4Z";
+        var currentVideoIndex = 0;
 
+        var videoIds = [
+            "gdEe_lXsULg", "ZwGn7CDhiGs", "ZQRsDx11pCg", "DbSfsdS7lkw", "azoQ9gSJ-60", "1kp4Tnv8B7E", 
+            "H1SguK7rSTM", "4eNxIZrq9U4", "WYS2PMgCfRE", "SV4k2XNS0tE", "S_KWsUR08P8", "hWp7IjONZCM", 
+            "ZwGn7CDhiGs", "gdEe_lXsULg", "x65yxfRo6rM", "I4jh4ojwSoM", "azoQ9gSJ-60", "EcImU26ThN4", 
+            "1kp4Tnv8B7E", "DbSfsdS7lkw", "-P9U7nDbr0A", "Cqfrffq81sU", "csa8ry5sgIs", "WvV5TbJc9tQ", 
+            "1kp4Tnv8B7E", "ZwGn7CDhiGs", "8erv9o7A7mg", "uuy9oJmfFK8", "e0ACFFptjj0"
+        ];
+
+        function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '100%',
                 width: '100%',
-                videoId: '',
+                videoId: videoIds[currentVideoIndex],
                 playerVars: {
                     'autoplay': 1,
                     'controls': 0,
-                    'loop': 1,
-                    'playlist': playlist1 + "," + playlist2
+                    'loop': 0
                 },
                 events: {
                     'onReady': onPlayerReady,
@@ -194,14 +200,19 @@
 
             var skipButton = document.getElementById('skip-button');
             skipButton.addEventListener('click', function() {
-                player.nextVideo();
+                playNextVideo();
             });
         }
 
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.ENDED) {
-                player.nextVideo();
+                playNextVideo();
             }
+        }
+
+        function playNextVideo() {
+            currentVideoIndex = (currentVideoIndex + 1) % videoIds.length;
+            player.loadVideoById(videoIds[currentVideoIndex]);
         }
     </script>
 </body>
