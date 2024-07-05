@@ -17,6 +17,7 @@
             height: 100vh; /* Ensure the body covers the full viewport height */
             position: relative;
         }
+
         /* Navbar Styles */
         .navbar {
             background-color: #111;
@@ -31,18 +32,22 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .navbar h1 {
             font-size: 24px;
         }
+
         .navbar a {
             color: #0f0;
             text-decoration: none;
             padding: 10px 15px;
         }
+
         .navbar a:hover {
             background-color: #0c0;
             border-radius: 5px; /* Add rounded corners on hover */
         }
+
         /* Container Styles */
         .container {
             max-width: 900px;
@@ -50,8 +55,9 @@
             padding: 20px;
             background: #111;
             border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); /* Increase shadow opacity */
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
         }
+
         /* Heading Styles */
         h1 {
             font-size: 36px;
@@ -59,21 +65,34 @@
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
+
         /* Paragraph Styles */
         p {
             font-size: 18px;
             line-height: 1.6;
         }
-        /* Code Block Styles */
-        pre {
-            background: #222;
-            padding: 10px;
-            border-radius: 4px;
-            overflow-x: auto;
+
+        /* Music Video Styles */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Place the video behind other content */
         }
-        code {
-            color: #f8f8f2;
+
+        .video-background iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            object-fit: cover; /* Ensure the video covers the whole background */
         }
+
         /* Footer Styles */
         .footer {
             text-align: center;
@@ -84,40 +103,11 @@
             bottom: 0;
             color: #0f0;
         }
-        /* Terminal Animation */
-        .terminal {
-            font-family: 'Courier New', Courier, monospace;
-            color: #0f0;
-            background-color: #000;
-            border: 2px solid #0f0;
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 5px;
-        }
-        .terminal .prompt {
-            color: #f8f8f2;
-        }
-        .terminal .command {
-            color: #f0f0f0;
-        }
-        /* Hacker Matrix Effect */
-        .matrix {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        .matrix canvas {
-            display: block;
-        }
     </style>
 </head>
 <body>
-    <div class="matrix">
-        <canvas id="matrix"></canvas>
+    <div class="video-background">
+        <iframe src="https://www.youtube.com/embed/CvEgdFJkcWw?autoplay=1&loop=1&playlist=CvEgdFJkcWw" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     <div class="navbar">
         <h1>The Bit Head</h1>
@@ -126,51 +116,11 @@
         <a href="#contact">Contact</a>
     </div>
     <div class="container">
-        <h1>THEBitHEad</h1>
-        <p>For Good</p>
-        <pre><code class="command">~$ ls -la</code></pre>
-        <pre><code class="command">drwxr-xr-x 2 user group 4096 Jul 5 12:00 .</code></pre>
-        <pre><code class="command">drwxr-xr-x 5 user group 4096 Jul 5 12:00 ..</code></pre>
-        <pre><code class="command">-rw-r--r-- 1 user group  123 Jul 5 12:00 index.html</code></pre>
+        <h1>WELCOME TO THE BIT HEAD</h1>
+        <p>Explore the depths of the digital world.</p>
     </div>
     <div class="footer">
-        <p>&copy; 2024 The Bit Head | <a href="https://github.com/yourusername" target="_blank" style="color: #0f0;">GitHub</a></p>
+        <p>&copy; 2024 The Bit Head | <a href="https://github.com/hitsuu23" target="_blank" style="color: #0f0;">GitHub</a></p>
     </div>
-    <script>
-        // Matrix Effect JavaScript
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.height = window.innerHeight;
-        canvas.width = window.innerWidth;
-
-        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-        const fontSize = 10;
-        const columns = canvas.width / fontSize;
-        const drops = Array.from({ length: columns }).fill(0);
-
-        function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Background color with transparency
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#0f0';
-            ctx.font = `${fontSize}px monospace`;
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-
-        setInterval(draw, 33);
-
-        // Ensure the canvas resizes with the window
-        window.addEventListener('resize', () => {
-            canvas.height = window.innerHeight;
-            canvas.width = window.innerWidth;
-        });
-    </script>
 </body>
 </html>
