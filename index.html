@@ -16,14 +16,51 @@
             overflow: hidden;
             height: 100vh; /* Full viewport height */
             position: relative;
+            display: flex; /* Sidebar and content side by side */
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #222; /* Darker sidebar background */
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Sidebar Navigation Styles */
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #c0c0ff; /* Purple underline */
+            padding-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            color: #c0c0ff; /* Purple text color for links */
+            text-decoration: none;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: underline; /* Underline on hover */
         }
 
         /* Video Background Styles */
         .video-background {
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
+            left: 200px; /* Push the video background to the right */
+            width: calc(100% - 200px); /* Subtract the width of the sidebar */
             height: 100%;
             overflow: hidden;
             z-index: -1; /* Behind all content */
@@ -44,7 +81,8 @@
         .text-content {
             position: absolute;
             top: 20px; /* Position the text content 20px from the top */
-            width: 100%;
+            left: 220px; /* Space from the sidebar */
+            width: calc(100% - 220px); /* Subtract the width of the sidebar and some margin */
             text-align: center;
             z-index: 1;
         }
@@ -61,23 +99,26 @@
         .controls {
             position: absolute;
             bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 220px; /* Space from the sidebar */
             display: flex;
-            gap: 20px;
+            gap: 15px;
             z-index: 2;
         }
 
-        .volume-control, .skip-button {
-            width: 200px;
+        .volume-control, .skip-button, .pause-button {
             padding: 10px;
-            background: transparent;
+            background: rgba(17, 17, 17, 0.7); /* Dark semi-transparent background */
             color: #c0c0ff; /* Purple text color */
             border: 2px solid #c0c0ff; /* Purple border */
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Slight shadow */
-            font-size: 18px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7); /* Slight shadow for a 3D effect */
+            font-size: 16px;
             cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease; /* Smooth transition */
+        }
+
+        .volume-control {
+            width: 100px; /* Adjust width for a more compact slider */
         }
 
         .volume-control::-webkit-slider-thumb {
@@ -100,10 +141,30 @@
 
         .skip-button:hover {
             background: #9b30ff; /* Lighter purple on hover */
+            transform: scale(1.1); /* Slightly enlarge on hover */
+        }
+
+        .pause-button:hover {
+            background: #9b30ff; /* Lighter purple on hover */
+            transform: scale(1.1); /* Slightly enlarge on hover */
+        }
+
+        /* Add styles for the pause button */
+        .pause-button {
+            width: 100px; /* Adjust width */
         }
     </style>
 </head>
 <body>
+    <div class="sidebar">
+        <h2>Sidebar</h2>
+        <ul>
+            <li><a href="#post1">Post 1</a></li>
+            <li><a href="#post2">Post 2</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </div>
+
     <div class="video-background">
         <div id="player"></div>
     </div>
@@ -111,6 +172,7 @@
         <h1>Welcome BitHead</h1>
     </div>
     <div class="controls">
+        <button class="pause-button" id="pause-button">Pause</button>
         <input type="range" class="volume-control" min="0" max="100" value="50" id="volume-slider">
         <button class="skip-button" id="skip-button">Skip</button>
     </div>
@@ -163,6 +225,19 @@
             volumeSlider.addEventListener('input', function() {
                 var newVolume = volumeSlider.value;
                 player.setVolume(newVolume);
+            });
+
+            // Get pause button and set up event listener
+            var pauseButton = document.getElementById('pause-button');
+            pauseButton.addEventListener('click', function() {
+                var state = player.getPlayerState();
+                if (state == YT.PlayerState.PLAYING) {
+                    player.pauseVideo();
+                    pauseButton.textContent = 'Play';
+                } else {
+                    player.playVideo();
+                    pauseButton.textContent = 'Pause';
+                }
             });
 
             // Get skip button and set up event listener
