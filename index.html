@@ -16,89 +16,14 @@
             overflow: hidden;
             height: 100vh; /* Full viewport height */
             position: relative;
-            display: flex; /* Sidebar and content side by side */
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            width: 300px; /* Increased width for post form */
-            height: 100vh;
-            background-color: #222; /* Darker sidebar background */
-            color: #fff;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        /* Sidebar Navigation Styles */
-        .sidebar h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #c0c0ff; /* Purple underline */
-            padding-bottom: 10px;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 10px;
-        }
-
-        .sidebar ul li a {
-            color: #c0c0ff; /* Purple text color for links */
-            text-decoration: none;
-        }
-
-        .sidebar ul li a:hover {
-            text-decoration: underline; /* Underline on hover */
-        }
-
-        /* Post Form Styles */
-        .post-form {
-            margin-top: 30px;
-        }
-
-        .post-form h3 {
-            font-size: 20px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #c0c0ff; /* Purple underline */
-            padding-bottom: 5px;
-        }
-
-        .post-form input, .post-form textarea, .post-form button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #c0c0ff;
-            box-sizing: border-box;
-            background-color: #333;
-            color: #fff;
-        }
-
-        .post-form button {
-            background-color: #c0c0ff; /* Purple button background */
-            color: #000; /* Black text color for button */
-            cursor: pointer;
-        }
-
-        .post-form button:hover {
-            background-color: #9b30ff; /* Lighter purple on hover */
-        }
-
-        /* Post List Styles */
-        .post-list {
-            margin-top: 30px;
         }
 
         /* Video Background Styles */
         .video-background {
             position: absolute;
             top: 0;
-            left: 300px; /* Push the video background to the right */
-            width: calc(100% - 300px); /* Subtract the width of the sidebar */
+            left: 0;
+            width: 100%;
             height: 100%;
             overflow: hidden;
             z-index: -1; /* Behind all content */
@@ -119,8 +44,7 @@
         .text-content {
             position: absolute;
             top: 20px; /* Position the text content 20px from the top */
-            left: 320px; /* Space from the sidebar */
-            width: calc(100% - 320px); /* Subtract the width of the sidebar and some margin */
+            width: 100%;
             text-align: center;
             z-index: 1;
         }
@@ -137,9 +61,10 @@
         .controls {
             position: absolute;
             bottom: 20px;
-            left: 320px; /* Space from the sidebar */
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            gap: 15px;
+            gap: 20px;
             z-index: 2;
         }
 
@@ -188,25 +113,8 @@
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h2>Sidebar</h2>
-        <ul>
-            <!-- Sidebar links are kept empty -->
-        </ul>
-
-        <!-- Post Form -->
-        <div class="post-form">
-            <h3>Create a Post</h3>
-            <input type="text" id="post-title" placeholder="Post Title" />
-            <textarea id="post-content" placeholder="Post Content"></textarea>
-            <button id="create-post">Create Post</button>
-        </div>
-
-        <!-- Post List -->
-        <div class="post-list" id="post-list"></div>
-    </div>
     <div class="video-background">
-        <iframe id="bg-video" src="https://www.youtube.com/embed/?playlist=4eNxIZrq9U4,WYS2PMgCfRE,SV4k2XNS0tE,S_KWsUR08P8,hWp7IjONZCM,ZwGn7CDhiGs,gdEe_lXsULg,x65yxfRo6rM,I4jh4ojwSoM,azoQ9gSJ-60,EcImU26ThN4,1kp4Tnv8B7E,DbSfsdS7lkw,-P9U7nDbr0A,UB2vI0tNT2I,Nu99xEAC45A,fhF1XErXz0o,6e4eiHXK0l0&autoplay=1&controls=0&loop=1&playlist=4eNxIZrq9U4,WYS2PMgCfRE,SV4k2XNS0tE,S_KWsUR08P8,hWp7IjONZCM,ZwGn7CDhiGs,gdEe_lXsULg,x65yxfRo6rM,I4jh4ojwSoM,azoQ9gSJ-60,EcImU26ThN4,1kp4Tnv8B7E,DbSfsdS7lkw,-P9U7nDbr0A,UB2vI0tNT2I,Nu99xEAC45A,fhF1XErXz0o,6e4eiHXK0l0&mute=1" frameborder="0"></iframe>
+        <div id="player"></div>
     </div>
     <div class="text-content">
         <h1>Welcome, BitHead!</h1>
@@ -216,30 +124,46 @@
         <button id="skip" class="skip-button">Skip</button>
         <button id="pause" class="pause-button">Pause</button>
     </div>
+
     <script>
+        // Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
         var player;
         var videos = [
-            '4eNxIZrq9U4', 'WYS2PMgCfRE', 'SV4k2XNS0tE', 'S_KWsUR08P8', 'hWp7IjONZCM',
-            'ZwGn7CDhiGs', 'gdEe_lXsULg', 'x65yxfRo6rM', 'I4jh4ojwSoM', 'azoQ9gSJ-60',
-            'EcImU26ThN4', '1kp4Tnv8B7E', 'DbSfsdS7lkw', '-P9U7nDbr0A', 'UB2vI0tNT2I',
-            'Nu99xEAC45A', 'fhF1XErXz0o', '6e4eiHXK0l0'
+            "rAHcYCf_kGc",
+            "D-lvdwOnMEU",
+            "qs9OzrkoLjs",
+            "svlzfK6EiAE",
+            "I18fNYNS4GA",
+            "fudsUhWAG_o",
+            "b8syt3hvu00",
+            "fmq39rSBi6g",
+            "OeLQOfb6IBU",
+            "9Pqo7TqmcXg",
+            "ZQRsDx11pCg",
+            "7b43XXLmDz8"
         ];
 
         function getRandomVideo() {
-            var randomIndex = Math.floor(Math.random() * videos.length);
+            const randomIndex = Math.floor(Math.random() * videos.length);
             return videos[randomIndex];
         }
 
         function onYouTubeIframeAPIReady() {
-            player = new YT.Player('bg-video', {
+            player = new YT.Player('player', {
                 height: '100%',
                 width: '100%',
-                playerVars: { 
-                    'autoplay': 1, 
-                    'controls': 0, 
-                    'loop': 1, 
-                    'playlist': videos.join(','), /* Use the entire playlist */
-                    'mute': 1 
+                videoId: getRandomVideo(),
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': videos.join(','), /* Playlist with all videos */
+                    'mute': 1
                 },
                 events: {
                     'onReady': onPlayerReady,
@@ -254,7 +178,7 @@
 
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.ENDED) {
-                player.loadVideoById(getRandomVideo()); // Load a new video
+                player.loadVideoById(getRandomVideo()); // Load a random video
             }
         }
 
@@ -277,29 +201,8 @@
             player.setVolume(volume); // Set the volume
         });
 
-        document.getElementById('create-post').addEventListener('click', function() {
-            var title = document.getElementById('post-title').value;
-            var content = document.getElementById('post-content').value;
-
-            if (title && content) {
-                var postList = document.getElementById('post-list');
-                var newPost = document.createElement('div');
-                newPost.className = 'post';
-                newPost.innerHTML = '<h4>' + title + '</h4><p>' + content + '</p>';
-                postList.appendChild(newPost);
-
-                // Clear the form
-                document.getElementById('post-title').value = '';
-                document.getElementById('post-content').value = '';
-            } else {
-                alert('Please enter both title and content.');
-            }
-        });
-
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        // Initialize the video player
+        onYouTubeIframeAPIReady();
     </script>
 </body>
 </html>
