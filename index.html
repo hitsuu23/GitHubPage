@@ -91,6 +91,19 @@
             height: 100%;
             border: none;
             object-fit: cover; /* Ensure the video covers the whole background */
+            opacity: 0.5; /* Adjust opacity to make the videos blend */
+        }
+
+        /* Overlay Styles */
+        .video-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+            z-index: -1;
         }
 
         /* Footer Styles */
@@ -103,11 +116,33 @@
             bottom: 0;
             color: #0f0;
         }
+
+        /* Terminal Animation */
+        .terminal {
+            font-family: 'Courier New', Courier, monospace;
+            color: #0f0;
+            background-color: #000;
+            border: 2px solid #0f0;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .terminal .prompt {
+            color: #f8f8f2;
+        }
+        .terminal .command {
+            color: #f0f0f0;
+        }
     </style>
 </head>
 <body>
     <div class="video-background">
-        <iframe src="https://www.youtube.com/embed/CvEgdFJkcWw?autoplay=1&loop=1&playlist=CvEgdFJkcWw" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <!-- Add multiple iframes for different videos -->
+        <iframe src="https://www.youtube.com/embed/videoseries?list=PLsLJRBCe_4RZJ1BS-30UCwI5Og5Jl2zh2&autoplay=1&loop=1&mute=1&controls=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/fYQmIO9U2Ow?autoplay=1&loop=1&playlist=fYQmIO9U2Ow&mute=1&controls=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/7HQ_-eWXyPI?autoplay=1&loop=1&playlist=7HQ_-eWXyPI&mute=1&controls=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/WW-9TcDTKa8?autoplay=1&loop=1&playlist=WW-9TcDTKa8&mute=1&controls=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/videoseries?list=PLsLJRBCe_4RZJ1BS-30UCwI5Og5Jl2zh2&autoplay=1&loop=1&mute=1&controls=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     <div class="navbar">
         <h1>The Bit Head</h1>
@@ -117,7 +152,7 @@
     </div>
     <div class="container">
         <h1>WELCOME TO THE BIT HEAD</h1>
-        <p>Explore the depths of the digital world.</p>
+        <p>Welcome to the digital realm.</p>
     </div>
     <div class="footer">
         <p>&copy; 2024 The Bit Head | <a href="https://github.com/hitsuu23" target="_blank" style="color: #0f0;">GitHub</a></p>
