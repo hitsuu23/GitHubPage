@@ -15,10 +15,7 @@
             color: #c0c0ff; /* Purple text color */
             overflow: hidden;
             height: 100vh; /* Full viewport height */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start; /* Align content to the top */
+            position: relative;
         }
 
         /* Video Background Styles */
@@ -45,9 +42,11 @@
 
         /* Text Styles */
         .text-content {
-            z-index: 1;
+            position: absolute;
+            top: 20px; /* Position the text content 20px from the top */
+            width: 100%;
             text-align: center;
-            padding-top: 20px; /* Add some padding at the top */
+            z-index: 1;
         }
 
         .text-content h1 {
