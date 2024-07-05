@@ -15,16 +15,15 @@
             color: #0f0;
             overflow-x: hidden;
             height: 100vh; /* Ensure the body covers the full viewport height */
-            position: relative;
             display: flex;
-            flex-direction: row; /* Arrange navbar and content in a row */
+            flex-direction: row; /* Arrange sidebar and content in a row */
         }
 
         /* Sidebar Styles */
         .sidebar {
             background-color: #111;
             color: #0f0;
-            padding: 10px;
+            padding: 20px;
             width: 250px; /* Sidebar width */
             height: 100vh; /* Full height */
             position: fixed; /* Fixed position */
@@ -32,6 +31,9 @@
             left: 0;
             z-index: 1000;
             overflow: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
         }
 
         .sidebar h1 {
@@ -40,16 +42,15 @@
         }
 
         .sidebar a {
-            display: block;
             color: #0f0;
             text-decoration: none;
             padding: 10px 15px;
             margin-bottom: 10px;
+            border-radius: 5px;
         }
 
         .sidebar a:hover {
             background-color: #0c0;
-            border-radius: 5px; /* Add rounded corners on hover */
         }
 
         /* Main Content Styles */
@@ -99,18 +100,6 @@
             opacity: 0.5; /* Adjust opacity to make the videos blend */
         }
 
-        /* Overlay Styles */
-        .video-background::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
-            z-index: -1;
-        }
-
         /* Footer Styles */
         .footer {
             text-align: center;
@@ -126,8 +115,8 @@
 </head>
 <body>
     <div class="video-background">
-        <!-- Use a playlist to play multiple videos -->
-        <iframe src="https://www.youtube.com/embed/videoseries?list=PLsLJRBCe_4RZJ1BS-30UCwI5Og5Jl2zh2&autoplay=1&loop=1&playlist=PLsLJRBCe_4RZJ1BS-30UCwI5Og5Jl2zh2&mute=1&controls=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <!-- Use JavaScript to change the video URL on each refresh -->
+        <iframe src="" id="video-background" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     <div class="sidebar">
         <h1>The Bit Head</h1>
@@ -143,5 +132,23 @@
     <div class="footer">
         <p>&copy; 2024 Bit Head | <a href="https://github.com/hitsuu23" target="_blank" style="color: #0f0;">GitHub</a></p>
     </div>
+    <script>
+        // List of video URLs
+        const videoUrls = [
+            "https://www.youtube.com/embed/WW-9TcDTKa8?autoplay=1&loop=1&playlist=WW-9TcDTKa8&mute=1&controls=0",
+            "https://www.youtube.com/embed/videoseries?list=PLsLJRBCe_4RZJ1BS-30UCwI5Og5Jl2zh2&autoplay=1&loop=1&mute=1&controls=0",
+            "https://www.youtube.com/embed/fYQmIO9U2Ow?autoplay=1&loop=1&playlist=fYQmIO9U2Ow&mute=1&controls=0",
+            "https://www.youtube.com/embed/7HQ_-eWXyPI?autoplay=1&loop=1&playlist=7HQ_-eWXyPI&mute=1&controls=0",
+            "https://www.youtube.com/embed/WW-9TcDTKa8?autoplay=1&loop=1&playlist=WW-9TcDTKa8&mute=1&controls=0",
+            "https://www.youtube.com/embed/videoseries?list=PLsLJRBCe_4RZJ1BS-30UCwI5Og5Jl2zh2&autoplay=1&loop=1&mute=1&controls=0"
+        ];
+
+        // Get a random video from the list
+        const randomIndex = Math.floor(Math.random() * videoUrls.length);
+        const videoUrl = videoUrls[randomIndex];
+
+        // Set the src attribute of the iframe
+        document.getElementById('video-background').src = videoUrl;
+    </script>
 </body>
 </html>
