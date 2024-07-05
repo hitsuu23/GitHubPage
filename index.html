@@ -69,7 +69,7 @@
             z-index: 2;
         }
 
-        .volume-control, .skip-button, .pause-button {
+        .skip-button {
             width: 150px;
             padding: 10px;
             background: #111;
@@ -81,25 +81,7 @@
             cursor: pointer;
         }
 
-        .volume-control::-webkit-slider-thumb {
-            background: #c0c0ff; /* Purple thumb */
-            border: 2px solid #111; /* Dark border */
-            border-radius: 50%;
-        }
-
-        .volume-control::-moz-range-thumb {
-            background: #c0c0ff; /* Purple thumb */
-            border: 2px solid #111; /* Dark border */
-            border-radius: 50%;
-        }
-
-        .volume-control::-ms-thumb {
-            background: #c0c0ff; /* Purple thumb */
-            border: 2px solid #111; /* Dark border */
-            border-radius: 50%;
-        }
-
-        .pause-button:hover, .skip-button:hover {
+        .skip-button:hover {
             background: #9b30ff; /* Lighter purple on hover */
         }
     </style>
@@ -112,8 +94,6 @@
         <h1>Welcome BitHead</h1>
     </div>
     <div class="controls">
-        <input type="range" class="volume-control" min="0" max="100" value="50" id="volume-slider">
-        <button class="pause-button" id="pause-button">Pause</button>
         <button class="skip-button" id="skip-button">Skip</button>
     </div>
 
@@ -165,31 +145,11 @@
         }
 
         function onPlayerReady(event) {
-            // Adjust the volume
-            const volumeSlider = document.getElementById('volume-slider');
-            volumeSlider.addEventListener('input', function() {
-                player.setVolume(volumeSlider.value);
-            });
-
-            // Pause the video
-            document.getElementById('pause-button').addEventListener('click', function() {
-                if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-                    player.pauseVideo(); // Pause the video
-                    this.textContent = 'Play'; // Change button text to "Play"
-                } else {
-                    player.playVideo(); // Play the video
-                    this.textContent = 'Pause'; // Change button text to "Pause"
-                }
-            });
-
             // Skip to the next video
             document.getElementById('skip-button').addEventListener('click', function() {
                 currentIndex = (currentIndex + 1) % videos.length; // Increment the index and loop around
                 player.loadVideoById(videos[currentIndex]); // Load the next video
             });
-
-            // Initial volume set
-            player.setVolume(volumeSlider.value);
         }
     </script>
 </body>
