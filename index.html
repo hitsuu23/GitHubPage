@@ -158,8 +158,8 @@
                     'autoplay': 1,
                     'controls': 0,
                     'loop': 1,
-                    'playlist': getRandomVideo(), // To loop through the video list
-                    'mute': 0
+                    'playlist': videos.join(','), // Use the playlist parameter to loop through all videos
+                    'mute': 0 // Ensure the video is not muted
                 },
                 events: {
                     'onReady': onPlayerReady,
@@ -189,7 +189,7 @@
             var pauseButton = document.getElementById('pause-button');
             pauseButton.addEventListener('click', function() {
                 var state = player.getPlayerState();
-                if (state == YT.PlayerState.PLAYING) {
+                if (state === YT.PlayerState.PLAYING) {
                     player.pauseVideo();
                     pauseButton.textContent = 'Play';
                 } else {
