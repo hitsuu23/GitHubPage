@@ -7,7 +7,6 @@
     <link rel="icon" href="https://example.com/favicon.ico"> <!-- Replace with your own favicon -->
     <link href="https://fonts.googleapis.com/css2?family=Old+English+Text+MT&display=swap" rel="stylesheet"> <!-- Link to Old English Text MT font -->
     <style>
-        /* Your CSS styles */
         /* Overall Body Styles */
         body {
             font-family: 'Old English Text MT', 'Blackletter', serif; /* Specify the desired font */
@@ -66,12 +65,12 @@
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 20px;
+            gap: 10px; /* Adjust gap between buttons */
             z-index: 2;
         }
 
-        .volume-control, .skip-button {
-            width: 200px;
+        .volume-control, .skip-button, .pause-button {
+            width: 150px;
             padding: 10px;
             background: #111;
             color: #c0c0ff; /* Purple text color */
@@ -100,7 +99,7 @@
             border-radius: 50%;
         }
 
-        .skip-button:hover {
+        .pause-button:hover, .skip-button:hover {
             background: #9b30ff; /* Lighter purple on hover */
         }
     </style>
@@ -114,6 +113,7 @@
     </div>
     <div class="controls">
         <input type="range" class="volume-control" min="0" max="100" value="50" id="volume-slider">
+        <button class="pause-button" id="pause-button">Pause</button>
         <button class="skip-button" id="skip-button">Skip</button>
     </div>
 
@@ -175,6 +175,17 @@
             const volumeSlider = document.getElementById('volume-slider');
             volumeSlider.addEventListener('input', function() {
                 player.setVolume(volumeSlider.value);
+            });
+
+            // Pause the video
+            document.getElementById('pause-button').addEventListener('click', function() {
+                if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                    player.pauseVideo(); // Pause the video
+                    this.textContent = 'Play'; // Change button text to "Play"
+                } else {
+                    player.playVideo(); // Play the video
+                    this.textContent = 'Pause'; // Change button text to "Pause"
+                }
             });
 
             // Skip to the next video
