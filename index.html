@@ -125,39 +125,33 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
+        var videos = [
+            "DbSfsdS7lkw",
+            "azoQ9gSJ-60",
+            "1kp4Tnv8B7E",
+            "H1SguK7rSTM",
+            "4eNxIZrq9U4",
+            "WYS2PMgCfRE",
+            "SV4k2XNS0tE",
+            "S_KWsUR08P8",
+            "hWp7IjONZCM",
+            "x65yxfRo6rM",
+            "I4jh4ojwSoM",
+            "EcImU26ThN4",
+            "-P9U7nDbr0A",
+            "Cqfrffq81sU",
+            "csa8ry5sgIs",
+            "8erv9o7A7mg",
+            "uuy9oJmfFK8",
+            "e0ACFFptjj0"
+        ];
+        var currentIndex = 0;
+
         function onYouTubeIframeAPIReady() {
-            // Array of video URLs
-            const videos = [
-                "DbSfsdS7lkw",
-                "azoQ9gSJ-60",
-                "1kp4Tnv8B7E",
-                "H1SguK7rSTM",
-                "4eNxIZrq9U4",
-                "WYS2PMgCfRE",
-                "SV4k2XNS0tE",
-                "S_KWsUR08P8",
-                "hWp7IjONZCM",
-                "x65yxfRo6rM",
-                "I4jh4ojwSoM",
-                "EcImU26ThN4",
-                "-P9U7nDbr0A",
-                "Cqfrffq81sU",
-                "csa8ry5sgIs",
-                "8erv9o7A7mg",
-                "uuy9oJmfFK8",
-                "e0ACFFptjj0"
-            ];
-
-            // Function to get a random video URL
-            function getRandomVideo() {
-                const randomIndex = Math.floor(Math.random() * videos.length);
-                return videos[randomIndex];
-            }
-
             player = new YT.Player('player', {
                 height: '100%',
                 width: '100%',
-                videoId: getRandomVideo(),
+                videoId: videos[currentIndex],
                 playerVars: {
                     'autoplay': 1,
                     'controls': 0,
@@ -190,7 +184,8 @@
 
             // Skip to the next video
             document.getElementById('skip-button').addEventListener('click', function() {
-                player.loadVideoById(getRandomVideo()); // Load a new random video
+                currentIndex = (currentIndex + 1) % videos.length; // Increment the index and loop around
+                player.loadVideoById(videos[currentIndex]); // Load the next video
             });
 
             // Initial volume set
