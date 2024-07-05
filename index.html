@@ -137,6 +137,10 @@
         .skip-button:hover {
             background: #9b30ff;
         }
+
+        .hide {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -194,7 +198,10 @@
                 playerVars: {
                     'autoplay': 1,
                     'controls': 0,
-                    'loop': 0
+                    'loop': 0,
+                    'playlist': videoIds.join(','),
+                    'rel': 0,
+                    'showinfo': 0
                 },
                 events: {
                     'onReady': onPlayerReady,
@@ -216,6 +223,9 @@
             skipButton.addEventListener('click', function() {
                 playNextVideo();
             });
+
+            // Ensure the volume slider is updated to reflect the initial volume
+            volumeSlider.value = 50;
         }
 
         function onPlayerStateChange(event) {
