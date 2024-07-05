@@ -177,7 +177,8 @@
                     'playlist': playlist1 + "," + playlist2
                 },
                 events: {
-                    'onReady': onPlayerReady
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
                 }
             });
         }
@@ -195,6 +196,12 @@
             skipButton.addEventListener('click', function() {
                 player.nextVideo();
             });
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                player.nextVideo();
+            }
         }
     </script>
 </body>
