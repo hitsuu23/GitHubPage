@@ -21,7 +21,7 @@
 
         /* Sidebar Styles */
         .sidebar {
-            width: 200px;
+            width: 300px; /* Increased width for post form */
             height: 100vh;
             background-color: #222; /* Darker sidebar background */
             color: #fff;
@@ -55,12 +55,67 @@
             text-decoration: underline; /* Underline on hover */
         }
 
+        /* Post Form Styles */
+        .post-form {
+            margin-top: 30px;
+        }
+
+        .post-form h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #c0c0ff; /* Purple underline */
+            padding-bottom: 5px;
+        }
+
+        .post-form input, .post-form textarea, .post-form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #c0c0ff;
+            box-sizing: border-box;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .post-form button {
+            background-color: #c0c0ff; /* Purple button background */
+            color: #000; /* Black text color for button */
+            cursor: pointer;
+        }
+
+        .post-form button:hover {
+            background-color: #9b30ff; /* Lighter purple on hover */
+        }
+
+        /* Post List Styles */
+        .post-list {
+            margin-top: 30px;
+        }
+
+        .post-list .post {
+            background: #333;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #c0c0ff;
+        }
+
+        .post-list .post h4 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+
+        .post-list .post p {
+            margin: 0;
+        }
+
         /* Video Background Styles */
         .video-background {
             position: absolute;
             top: 0;
-            left: 200px; /* Push the video background to the right */
-            width: calc(100% - 200px); /* Subtract the width of the sidebar */
+            left: 300px; /* Push the video background to the right */
+            width: calc(100% - 300px); /* Subtract the width of the sidebar */
             height: 100%;
             overflow: hidden;
             z-index: -1; /* Behind all content */
@@ -81,8 +136,8 @@
         .text-content {
             position: absolute;
             top: 20px; /* Position the text content 20px from the top */
-            left: 220px; /* Space from the sidebar */
-            width: calc(100% - 220px); /* Subtract the width of the sidebar and some margin */
+            left: 320px; /* Space from the sidebar */
+            width: calc(100% - 320px); /* Subtract the width of the sidebar and some margin */
             text-align: center;
             z-index: 1;
         }
@@ -99,7 +154,7 @@
         .controls {
             position: absolute;
             bottom: 20px;
-            left: 220px; /* Space from the sidebar */
+            left: 320px; /* Space from the sidebar */
             display: flex;
             gap: 15px;
             z-index: 2;
@@ -158,6 +213,17 @@
             <li><a href="#post3">Post 3</a></li>
             <li><a href="#post4">Post 4</a></li>
         </ul>
+
+        <!-- Post Form -->
+        <div class="post-form">
+            <h3>Create a Post</h3>
+            <input type="text" id="post-title" placeholder="Post Title" />
+            <textarea id="post-content" placeholder="Post Content"></textarea>
+            <button id="create-post">Create Post</button>
+        </div>
+
+        <!-- Post List -->
+        <div class="post-list" id="post-list"></div>
     </div>
     <div class="video-background">
         <iframe id="bg-video" src="https://www.youtube.com/embed/?playlist=4eNxIZrq9U4, WYS2PMgCfRE, SV4k2XNS0tE, S_KWsUR08P8, hWp7IjONZCM, ZwGn7CDhiGs, gdEe_lXsULg, x65yxfRo6rM, I4jh4ojwSoM, azoQ9gSJ-60, EcImU26ThN4, 1kp4Tnv8B7E, DbSfsdS7lkw, -P9U7nDbr0A, UB2vI0tNT2I, Nu99xEAC45A, fhF1XErXz0o, 6e4eiHXK0l0&autoplay=1&controls=0&loop=1&playlist=4eNxIZrq9U4&mute=1" frameborder="0"></iframe>
@@ -223,6 +289,25 @@
         document.getElementById('volume').addEventListener('input', function() {
             var volume = this.value;
             player.setVolume(volume);
+        });
+
+        document.getElementById('create-post').addEventListener('click', function() {
+            var title = document.getElementById('post-title').value;
+            var content = document.getElementById('post-content').value;
+
+            if (title && content) {
+                var postList = document.getElementById('post-list');
+                var newPost = document.createElement('div');
+                newPost.className = 'post';
+                newPost.innerHTML = '<h4>' + title + '</h4><p>' + content + '</p>';
+                postList.appendChild(newPost);
+
+                // Clear the form
+                document.getElementById('post-title').value = '';
+                document.getElementById('post-content').value = '';
+            } else {
+                alert('Please enter both title and content.');
+            }
         });
 
         var tag = document.createElement('script');
