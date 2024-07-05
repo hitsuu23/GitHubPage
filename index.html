@@ -16,46 +16,51 @@
             overflow-x: hidden;
             height: 100vh; /* Ensure the body covers the full viewport height */
             position: relative;
+            display: flex;
+            flex-direction: row; /* Arrange navbar and content in a row */
         }
 
-        /* Navbar Styles */
-        .navbar {
+        /* Sidebar Styles */
+        .sidebar {
             background-color: #111;
             color: #0f0;
             padding: 10px;
-            position: fixed;
-            width: 100%;
+            width: 250px; /* Sidebar width */
+            height: 100vh; /* Full height */
+            position: fixed; /* Fixed position */
             top: 0;
             left: 0;
             z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            overflow: auto;
         }
 
-        .navbar h1 {
+        .sidebar h1 {
             font-size: 24px;
+            margin-bottom: 20px;
         }
 
-        .navbar a {
+        .sidebar a {
+            display: block;
             color: #0f0;
             text-decoration: none;
             padding: 10px 15px;
+            margin-bottom: 10px;
         }
 
-        .navbar a:hover {
+        .sidebar a:hover {
             background-color: #0c0;
             border-radius: 5px; /* Add rounded corners on hover */
         }
 
-        /* Container Styles */
-        .container {
-            max-width: 900px;
-            margin: 80px auto 20px;
+        /* Main Content Styles */
+        .content {
+            margin-left: 250px; /* Space for the sidebar */
             padding: 20px;
+            flex: 1;
             background: #111;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            overflow: auto; /* Ensure content scrolls if needed */
         }
 
         /* Heading Styles */
@@ -112,26 +117,10 @@
             padding: 10px;
             background: #111;
             position: fixed;
-            width: 100%;
+            width: calc(100% - 250px); /* Full width minus sidebar */
             bottom: 0;
+            left: 250px; /* Align with the main content */
             color: #0f0;
-        }
-
-        /* Terminal Animation */
-        .terminal {
-            font-family: 'Courier New', Courier, monospace;
-            color: #0f0;
-            background-color: #000;
-            border: 2px solid #0f0;
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 5px;
-        }
-        .terminal .prompt {
-            color: #f8f8f2;
-        }
-        .terminal .command {
-            color: #f0f0f0;
         }
     </style>
 </head>
@@ -140,13 +129,16 @@
         <!-- Use a playlist to play multiple videos -->
         <iframe src="https://www.youtube.com/embed/videoseries?list=PLsLJRBCe_4RZJ1BS-30UCwI5Og5Jl2zh2&autoplay=1&loop=1&playlist=PLsLJRBCe_4RZJ1BS-30UCwI5Og5Jl2zh2&mute=1&controls=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
-    <div class="navbar">
+    <div class="sidebar">
         <h1>The Bit Head</h1>
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
     </div>
-    <div class="container">
+    <div class="content">
+        <!-- Main Content -->
+        <h1>Welcome to The Bit Head</h1>
+        <p>Explore the depths of the digital world.</p>
     </div>
     <div class="footer">
         <p>&copy; 2024 Bit Head | <a href="https://github.com/hitsuu23" target="_blank" style="color: #0f0;">GitHub</a></p>
