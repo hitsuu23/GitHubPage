@@ -130,40 +130,55 @@
 
         var player;
         var videos = [
-            "gdEe_lXsULg",  // $uicideboy$ - Video 1
-            "ZwGn7CDhiGs",  // $uicideboy$ - Video 2
-            "ZQRsDx11pCg",  // $uicideboy$ - Video 3
-            "DbSfsdS7lkw",  // TeamSESH - Video 4
-            "azoQ9gSJ-60",  // TeamSESH - Video 5
-            "1kp4Tnv8B7E",  // TeamSESH - Video 6
-            "H1SguK7rSTM",  // BLACKKRAY - Video 7
-            "4eNxIZrq9U4",  // $uicideboy$ - Video 8
-            "WYS2PMgCfRE",  // Lil Peep - Video 9
-            "SV4k2XNS0tE",  // Fuffnite - Video 10
-            "S_KWsUR08P8",  // Lil Peep - Video 11
-            "hWp7IjONZCM",  // Lil Peep - Video 12
-            "x65yxfRo6rM",  // Lil Peep - Video 13
-            "I4jh4ojwSoM",  // TeamSESH - Video 14
-            "azoQ9gSJ-60",  // TeamSESH - Video 15 (duplicate)
-            "EcImU26ThN4",  // TeamSESH - Video 16
-            "DbSfsdS7lkw",  // TeamSESH - Video 17 (duplicate)
-            "-P9U7nDbr0A",  // TeamSESH - Video 18
-            "Cqfrffq81sU",  // TeamSESH - Video 19
-            "csa8ry5sgIs",  // TeamSESH - Video 20
-            "WvV5TbJc9tQ",  // Lil Peep - Video 21
-            "1kp4Tnv8B7E",  // TeamSESH - Video 22 (duplicate)
-            "ZwGn7CDhiGs",  // $uicideboy$ - Video 23 (duplicate)
-            "8erv9o7A7mg",  // $uicideboy$ - Video 24
-            "uuy9oJmfFK8",  // $uicideboy$ - Video 25
-            "e0ACFFptjj0"   // TeamSESH - Video 26
+            "gdEe_lXsULg", // $uicideboy$
+            "ZwGn7CDhiGs", // $uicideboy$
+            "ZQRsDx11pCg", // $uicideboy$
+            "DbSfsdS7lkw", // TeamSESH
+            "azoQ9gSJ-60", // TeamSESH
+            "1kp4Tnv8B7E", // TeamSESH
+            "H1SguK7rSTM", // BLACKKRAY
+            "4eNxIZrq9U4", // $uicideboy$
+            "WYS2PMgCfRE", // LilPeep-Topic
+            "SV4k2XNS0tE", // Fuffnite
+            "S_KWsUR08P8", // LilPeep
+            "hWp7IjONZCM", // LilPeep
+            "x65yxfRo6rM", // LilPeep
+            "I4jh4ojwSoM", // TeamSESH
+            "EcImU26ThN4", // TeamSESH
+            "-P9U7nDbr0A", // TeamSESH
+            "Cqfrffq81sU", // TeamSESH
+            "csa8ry5sgIs", // TeamSESH
+            "WvV5TbJc9tQ", // LilPeep
+            "8erv9o7A7mg", // $uicideboy$
+            "uuy9oJmfFK8", // $uicideboy$
+            "e0ACFFptjj0", // TeamSESH
+            "zo9XxLs9sHI", // Playlist 1
+            "gH2iFwB95eY", // Playlist 1
+            "vO-xS0Ilgbo", // Playlist 1
+            "s5tVXRM2CqI", // Playlist 1
+            "9SO8z7RUO0s", // Playlist 1
+            "VbT-m3TtBEw", // Playlist 1
+            "YKNL7LXhl0s", // Playlist 1
+            "O-f_8lzM4D0", // Playlist 1
+            "pPaQKnFJxsw", // Playlist 1
+            "BGZ3F0_O1gY", // Playlist 1
+            "IhG7Uk8EvzA", // Playlist 2
+            "7Wy7sWxwF70", // Playlist 2
+            "5X_2OoAd1D0", // Playlist 2
+            "l5DgfsaF5_0", // Playlist 2
+            "tD83Xxxt5gE", // Playlist 2
+            "A0fzAA6JQmE", // Playlist 2
+            "nPzGWZpizWk", // Playlist 2
+            "PH0vHH5q3OQ", // Playlist 2
+            "pGlxtrGmfJY", // Playlist 2
+            "xwJ20lRtJr4"  // Playlist 2
         ];
 
-        function getRandomVideo() {
-            const randomIndex = Math.floor(Math.random() * videos.length);
-            return videos[randomIndex];
-        }
-
         function onYouTubeIframeAPIReady() {
+            // Shuffle the videos array
+            videos = shuffleArray(videos);
+
+            // Create the YouTube player
             player = new YT.Player('player', {
                 height: '100%',
                 width: '100%',
@@ -172,54 +187,60 @@
                     'autoplay': 1,
                     'controls': 0,
                     'loop': 1,
-                    'playlist': videos.join(','), // Loop through the playlist
-                    'mute': 0, // Ensure the video is not muted
-                    'origin': window.location.origin // Allow autoplay across domains
+                    'playlist': videos.join(','), // Loop through all videos
+                    'rel': 0,
+                    'showinfo': 0
                 },
                 events: {
-                    'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
                 }
             });
-        }
 
-        function onPlayerReady(event) {
-            // Set initial volume
-            event.target.setVolume(50);
-
-            // Get volume slider and set up event listener
+            // Volume Control
             var volumeSlider = document.getElementById('volume-slider');
-            volumeSlider.addEventListener('input', function() {
-                var newVolume = volumeSlider.value;
-                player.setVolume(newVolume);
+            volumeSlider.addEventListener('input', function () {
+                var volume = volumeSlider.value;
+                player.setVolume(volume);
             });
 
-            // Get skip button and set up event listener
-            var skipButton = document.getElementById('skip-button');
-            skipButton.addEventListener('click', function() {
-                player.loadVideoById(getRandomVideo());
-            });
-
-            // Get pause button and set up event listener
-            var pauseButton = document.getElementById('pause-button');
-            pauseButton.addEventListener('click', function() {
-                var state = player.getPlayerState();
-                if (state === YT.PlayerState.PLAYING) {
-                    player.pauseVideo();
-                    pauseButton.textContent = 'Play';
-                } else {
-                    player.playVideo();
-                    pauseButton.textContent = 'Pause';
-                }
-            });
+            // Set initial volume slider value
+            volumeSlider.value = 50;
         }
 
         function onPlayerStateChange(event) {
-            // When video ends, load a new video
-            if (event.data === YT.PlayerState.ENDED) {
-                player.loadVideoById(getRandomVideo());
+            if (event.data == YT.PlayerState.ENDED) {
+                player.loadVideoById(getRandomVideo()); // Load a new random video when the current one ends
             }
         }
+
+        function getRandomVideo() {
+            var randomIndex = Math.floor(Math.random() * videos.length);
+            return videos[randomIndex];
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Skip Button Event Listener
+        document.getElementById('skip-button').addEventListener('click', function () {
+            player.loadVideoById(getRandomVideo());
+        });
+
+        // Pause/Play Button Event Listener
+        document.getElementById('pause-button').addEventListener('click', function () {
+            if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+                this.textContent = 'Play';
+            } else {
+                player.playVideo();
+                this.textContent = 'Pause';
+            }
+        });
     </script>
 </body>
 </html>
