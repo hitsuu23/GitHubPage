@@ -155,91 +155,80 @@
         <ul>
             <li><a href="#post1">Post 1</a></li>
             <li><a href="#post2">Post 2</a></li>
-            <!-- Add more navigation links as needed -->
+            <li><a href="#post3">Post 3</a></li>
+            <li><a href="#post4">Post 4</a></li>
         </ul>
     </div>
-
     <div class="video-background">
-        <div id="player"></div>
+        <iframe id="bg-video" src="https://www.youtube.com/embed/?playlist=4eNxIZrq9U4, WYS2PMgCfRE, SV4k2XNS0tE, S_KWsUR08P8, hWp7IjONZCM, ZwGn7CDhiGs, gdEe_lXsULg, x65yxfRo6rM, I4jh4ojwSoM, azoQ9gSJ-60, EcImU26ThN4, 1kp4Tnv8B7E, DbSfsdS7lkw, -P9U7nDbr0A, UB2vI0tNT2I, Nu99xEAC45A, fhF1XErXz0o, 6e4eiHXK0l0&autoplay=1&controls=0&loop=1&playlist=4eNxIZrq9U4&mute=1" frameborder="0"></iframe>
     </div>
     <div class="text-content">
-        <h1>Welcome BitHead</h1>
+        <h1>Welcome, BitHead!</h1>
     </div>
     <div class="controls">
-        <button class="pause-button" id="pause-button">Pause</button>
-        <input type="range" class="volume-control" min="0" max="100" value="50" id="volume-slider">
-        <button class="skip-button" id="skip-button">Skip</button>
+        <input type="range" id="volume" class="volume-control" min="0" max="100" value="0">
+        <button id="skip" class="skip-button">Skip</button>
+        <button id="pause" class="pause-button">Pause</button>
     </div>
-
     <script>
-        // Load the IFrame Player API code asynchronously.
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
         var player;
+        var videos = [
+            '4eNxIZrq9U4', 'WYS2PMgCfRE', 'SV4k2XNS0tE', 'S_KWsUR08P8', 'hWp7IjONZCM',
+            'ZwGn7CDhiGs', 'gdEe_lXsULg', 'x65yxfRo6rM', 'I4jh4ojwSoM', 'azoQ9gSJ-60',
+            'EcImU26ThN4', '1kp4Tnv8B7E', 'DbSfsdS7lkw', '-P9U7nDbr0A', 'UB2vI0tNT2I',
+            'Nu99xEAC45A', 'fhF1XErXz0o', '6e4eiHXK0l0'
+        ];
+
+        function getRandomVideo() {
+            var randomIndex = Math.floor(Math.random() * videos.length);
+            return videos[randomIndex];
+        }
+
         function onYouTubeIframeAPIReady() {
-            // Array of video URLs
-            const videos = [
-                "4eNxIZrq9U4", "WYS2PMgCfRE", "SV4k2XNS0tE", "S_KWsUR08P8",
-                "hWp7IjONZCM", "ZwGn7CDhiGs", "gdEe_lXsULg", "x65yxfRo6rM",
-                "I4jh4ojwSoM", "azoQ9gSJ-60", "EcImU26ThN4", "1kp4Tnv8B7E",
-                "DbSfsdS7lkw", "-P9U7nDbr0A"
-            ];
-
-            // Function to get a random video URL
-            function getRandomVideo() {
-                const randomIndex = Math.floor(Math.random() * videos.length);
-                return videos[randomIndex];
-            }
-
-            player = new YT.Player('player', {
+            player = new YT.Player('bg-video', {
                 height: '100%',
                 width: '100%',
-                videoId: getRandomVideo(),
-                playerVars: {
-                    'autoplay': 1,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': getRandomVideo() // Loop the same video
-                },
+                playerVars: { 'autoplay': 1, 'controls': 0, 'loop': 1, 'playlist': getRandomVideo(), 'mute': 1 },
                 events: {
-                    'onReady': onPlayerReady
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
                 }
             });
         }
 
         function onPlayerReady(event) {
-            // Set initial volume
-            event.target.setVolume(50);
-
-            // Get volume slider and set up event listener
-            var volumeSlider = document.getElementById('volume-slider');
-            volumeSlider.addEventListener('input', function() {
-                var newVolume = volumeSlider.value;
-                player.setVolume(newVolume);
-            });
-
-            // Get pause button and set up event listener
-            var pauseButton = document.getElementById('pause-button');
-            pauseButton.addEventListener('click', function() {
-                var state = player.getPlayerState();
-                if (state == YT.PlayerState.PLAYING) {
-                    player.pauseVideo();
-                    pauseButton.textContent = 'Play';
-                } else {
-                    player.playVideo();
-                    pauseButton.textContent = 'Pause';
-                }
-            });
-
-            // Get skip button and set up event listener
-            var skipButton = document.getElementById('skip-button');
-            skipButton.addEventListener('click', function() {
-                player.loadVideoById(getRandomVideo());
-            });
+            event.target.mute();
         }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                player.loadVideoById(getRandomVideo());
+            }
+        }
+
+        document.getElementById('skip').addEventListener('click', function() {
+            player.loadVideoById(getRandomVideo());
+        });
+
+        document.getElementById('pause').addEventListener('click', function() {
+            if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+                this.textContent = 'Play';
+            } else {
+                player.playVideo();
+                this.textContent = 'Pause';
+            }
+        });
+
+        document.getElementById('volume').addEventListener('input', function() {
+            var volume = this.value;
+            player.setVolume(volume);
+        });
+
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     </script>
 </body>
 </html>
