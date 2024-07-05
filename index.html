@@ -71,7 +71,7 @@
         .volume-control, .skip-button {
             width: 200px;
             padding: 10px;
-            background: #111;
+            background: transparent;
             color: #c0c0ff; /* Purple text color */
             border: 2px solid #c0c0ff; /* Purple border */
             border-radius: 8px;
@@ -126,18 +126,10 @@
         function onYouTubeIframeAPIReady() {
             // Array of video URLs
             const videos = [
-                "rAHcYCf_kGc",
-                "D-lvdwOnMEU",
-                "qs9OzrkoLjs",
-                "svlzfK6EiAE",
-                "I18fNYNS4GA",
-                "fudsUhWAG_o",
-                "b8syt3hvu00",
-                "fmq39rSBi6g",
-                "OeLQOfb6IBU",
-                "9Pqo7TqmcXg",
-                "ZQRsDx11pCg",
-                "7b43XXLmDz8"
+                "4eNxIZrq9U4", "WYS2PMgCfRE", "SV4k2XNS0tE", "S_KWsUR08P8",
+                "hWp7IjONZCM", "ZwGn7CDhiGs", "gdEe_lXsULg", "x65yxfRo6rM",
+                "I4jh4ojwSoM", "azoQ9gSJ-60", "EcImU26ThN4", "1kp4Tnv8B7E",
+                "DbSfsdS7lkw", "-P9U7nDbr0A"
             ];
 
             // Function to get a random video URL
@@ -178,26 +170,6 @@
             skipButton.addEventListener('click', function() {
                 player.loadVideoById(getRandomVideo());
             });
-        }
-
-        // Function to get a random video URL (moved outside onYouTubeIframeAPIReady for skip function)
-        function getRandomVideo() {
-            const videos = [
-                "rAHcYCf_kGc",
-                "D-lvdwOnMEU",
-                "qs9OzrkoLjs",
-                "svlzfK6EiAE",
-                "I18fNYNS4GA",
-                "fudsUhWAG_o",
-                "b8syt3hvu00",
-                "fmq39rSBi6g",
-                "OeLQOfb6IBU",
-                "9Pqo7TqmcXg",
-                "ZQRsDx11pCg",
-                "7b43XXLmDz8"
-            ];
-            const randomIndex = Math.floor(Math.random() * videos.length);
-            return videos[randomIndex];
         }
     </script>
 </body>
