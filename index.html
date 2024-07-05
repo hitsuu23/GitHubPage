@@ -56,41 +56,86 @@
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add text shadow for better readability */
         }
+
+        /* Volume Control Styles */
+        .volume-control {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            z-index: 2;
+        }
     </style>
 </head>
 <body>
     <div class="video-background">
-        <iframe id="background-video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div id="player"></div>
     </div>
     <div class="text-content">
         <h1>Welcome, BitHead!</h1>
     </div>
+    <input type="range" class="volume-control" min="0" max="100" value="50" id="volume-slider">
 
     <script>
-        // Array of video URLs
-        const videos = [
-            "https://www.youtube.com/embed/rAHcYCf_kGc?autoplay=1&mute=1&controls=0",
-            "https://www.youtube.com/embed/D-lvdwOnMEU?autoplay=1&mute=1&controls=0",
-            "https://www.youtube.com/embed/qs9OzrkoLjs?autoplay=1&mute=1&controls=0",
-            "https://www.youtube.com/embed/svlzfK6EiAE?autoplay=1&mute=1&controls=0",
-            "https://www.youtube.com/embed/I18fNYNS4GA?autoplay=1&mute=1&controls=0",
-            "https://www.youtube.com/embed/fudsUhWAG_o?autoplay=1&mute=1&controls=0",
-            "https://www.youtube.com/embed/b8syt3hvu00?autoplay=1&mute=1&controls=0",
-            "https://www.youtube.com/embed/fmq39rSBi6g?autoplay=1&mute=1&controls=0",
-            "https://www.youtube.com/embed/OeLQOfb6IBU?autoplay=1&mute=1&controls=0",
-            "https://www.youtube.com/embed/9Pqo7TqmcXg?autoplay=1&mute=1&controls=0",
-            "https://www.youtube.com/embed/ZQRsDx11pCg?autoplay=1&mute=1&controls=0",
-            "https://www.youtube.com/embed/7b43XXLmDz8?autoplay=1&mute=1&controls=0"
-        ];
+        // Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        // Function to get a random video URL
-        function getRandomVideo() {
-            const randomIndex = Math.floor(Math.random() * videos.length);
-            return videos[randomIndex];
+        var player;
+        function onYouTubeIframeAPIReady() {
+            // Array of video URLs
+            const videos = [
+                "rAHcYCf_kGc",
+                "D-lvdwOnMEU",
+                "qs9OzrkoLjs",
+                "svlzfK6EiAE",
+                "I18fNYNS4GA",
+                "fudsUhWAG_o",
+                "b8syt3hvu00",
+                "fmq39rSBi6g",
+                "OeLQOfb6IBU",
+                "9Pqo7TqmcXg",
+                "ZQRsDx11pCg",
+                "7b43XXLmDz8"
+            ];
+
+            // Function to get a random video URL
+            function getRandomVideo() {
+                const randomIndex = Math.floor(Math.random() * videos.length);
+                return videos[randomIndex];
+            }
+
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                videoId: getRandomVideo(),
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0,
+                    'mute': 0,
+                    'loop': 1,
+                    'playlist': getRandomVideo() // Loop the same video
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
         }
 
-        // Set the src of the iframe to a random video URL
-        document.getElementById('background-video').src = getRandomVideo();
+        function onPlayerReady(event) {
+            // Set initial volume
+            event.target.setVolume(50);
+
+            // Get volume slider and set up event listener
+            var volumeSlider = document.getElementById('volume-slider');
+            volumeSlider.addEventListener('input', function() {
+                var newVolume = volumeSlider.value;
+                player.setVolume(newVolume);
+            });
+        }
     </script>
 </body>
 </html>
