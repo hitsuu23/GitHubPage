@@ -206,7 +206,7 @@
         <div class="post-list" id="post-list"></div>
     </div>
     <div class="video-background">
-        <iframe id="bg-video" src="https://www.youtube.com/embed/?playlist=4eNxIZrq9U4, WYS2PMgCfRE, SV4k2XNS0tE, S_KWsUR08P8, hWp7IjONZCM, ZwGn7CDhiGs, gdEe_lXsULg, x65yxfRo6rM, I4jh4ojwSoM, azoQ9gSJ-60, EcImU26ThN4, 1kp4Tnv8B7E, DbSfsdS7lkw, -P9U7nDbr0A, UB2vI0tNT2I, Nu99xEAC45A, fhF1XErXz0o, 6e4eiHXK0l0&autoplay=1&controls=0&loop=1&playlist=4eNxIZrq9U4&mute=1" frameborder="0"></iframe>
+        <iframe id="bg-video" src="https://www.youtube.com/embed/?playlist=4eNxIZrq9U4,WYS2PMgCfRE,SV4k2XNS0tE,S_KWsUR08P8,hWp7IjONZCM,ZwGn7CDhiGs,gdEe_lXsULg,x65yxfRo6rM,I4jh4ojwSoM,azoQ9gSJ-60,EcImU26ThN4,1kp4Tnv8B7E,DbSfsdS7lkw,-P9U7nDbr0A,UB2vI0tNT2I,Nu99xEAC45A,fhF1XErXz0o,6e4eiHXK0l0&autoplay=1&controls=0&loop=1&playlist=4eNxIZrq9U4,WYS2PMgCfRE,SV4k2XNS0tE,S_KWsUR08P8,hWp7IjONZCM,ZwGn7CDhiGs,gdEe_lXsULg,x65yxfRo6rM,I4jh4ojwSoM,azoQ9gSJ-60,EcImU26ThN4,1kp4Tnv8B7E,DbSfsdS7lkw,-P9U7nDbr0A,UB2vI0tNT2I,Nu99xEAC45A,fhF1XErXz0o,6e4eiHXK0l0&mute=1" frameborder="0"></iframe>
     </div>
     <div class="text-content">
         <h1>Welcome, BitHead!</h1>
@@ -234,7 +234,13 @@
             player = new YT.Player('bg-video', {
                 height: '100%',
                 width: '100%',
-                playerVars: { 'autoplay': 1, 'controls': 0, 'loop': 1, 'playlist': getRandomVideo(), 'mute': 1 },
+                playerVars: { 
+                    'autoplay': 1, 
+                    'controls': 0, 
+                    'loop': 1, 
+                    'playlist': videos.join(','), /* Use the entire playlist */
+                    'mute': 1 
+                },
                 events: {
                     'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
@@ -248,12 +254,12 @@
 
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.ENDED) {
-                player.loadVideoById(getRandomVideo());
+                player.loadVideoById(getRandomVideo()); // Load a new video
             }
         }
 
         document.getElementById('skip').addEventListener('click', function() {
-            player.loadVideoById(getRandomVideo());
+            player.loadVideoById(getRandomVideo()); // Load a random video
         });
 
         document.getElementById('pause').addEventListener('click', function() {
@@ -268,7 +274,7 @@
 
         document.getElementById('volume').addEventListener('input', function() {
             var volume = this.value;
-            player.setVolume(volume);
+            player.setVolume(volume); // Set the volume
         });
 
         document.getElementById('create-post').addEventListener('click', function() {
