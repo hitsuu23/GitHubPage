@@ -130,18 +130,32 @@
 
         var player;
         var videos = [
-            "rAHcYCf_kGc",  // Sample Video ID 1
-            "D-lvdwOnMEU",  // Sample Video ID 2
-            "qs9OzrkoLjs",  // Sample Video ID 3
-            "svlzfK6EiAE",  // Sample Video ID 4
-            "I18fNYNS4GA",  // Sample Video ID 5
-            "fudsUhWAG_o",  // Sample Video ID 6
-            "b8syt3hvu00",  // Sample Video ID 7
-            "fmq39rSBi6g",  // Sample Video ID 8
-            "OeLQOfb6IBU",  // Sample Video ID 9
-            "9Pqo7TqmcXg",  // Sample Video ID 10
-            "ZQRsDx11pCg",  // Sample Video ID 11
-            "7b43XXLmDz8"   // Sample Video ID 12
+            "gdEe_lXsULg",  // $uicideboy$ - Video 1
+            "ZwGn7CDhiGs",  // $uicideboy$ - Video 2
+            "ZQRsDx11pCg",  // $uicideboy$ - Video 3
+            "DbSfsdS7lkw",  // TeamSESH - Video 4
+            "azoQ9gSJ-60",  // TeamSESH - Video 5
+            "1kp4Tnv8B7E",  // TeamSESH - Video 6
+            "H1SguK7rSTM",  // BLACKKRAY - Video 7
+            "4eNxIZrq9U4",  // $uicideboy$ - Video 8
+            "WYS2PMgCfRE",  // Lil Peep - Video 9
+            "SV4k2XNS0tE",  // Fuffnite - Video 10
+            "S_KWsUR08P8",  // Lil Peep - Video 11
+            "hWp7IjONZCM",  // Lil Peep - Video 12
+            "x65yxfRo6rM",  // Lil Peep - Video 13
+            "I4jh4ojwSoM",  // TeamSESH - Video 14
+            "azoQ9gSJ-60",  // TeamSESH - Video 15 (duplicate)
+            "EcImU26ThN4",  // TeamSESH - Video 16
+            "DbSfsdS7lkw",  // TeamSESH - Video 17 (duplicate)
+            "-P9U7nDbr0A",  // TeamSESH - Video 18
+            "Cqfrffq81sU",  // TeamSESH - Video 19
+            "csa8ry5sgIs",  // TeamSESH - Video 20
+            "WvV5TbJc9tQ",  // Lil Peep - Video 21
+            "1kp4Tnv8B7E",  // TeamSESH - Video 22 (duplicate)
+            "ZwGn7CDhiGs",  // $uicideboy$ - Video 23 (duplicate)
+            "8erv9o7A7mg",  // $uicideboy$ - Video 24
+            "uuy9oJmfFK8",  // $uicideboy$ - Video 25
+            "e0ACFFptjj0"   // TeamSESH - Video 26
         ];
 
         function getRandomVideo() {
@@ -158,8 +172,9 @@
                     'autoplay': 1,
                     'controls': 0,
                     'loop': 1,
-                    'playlist': videos.join(','), // Use the playlist parameter to loop through all videos
-                    'mute': 0 // Ensure the video is not muted
+                    'playlist': videos.join(','), // Loop through the playlist
+                    'mute': 0, // Ensure the video is not muted
+                    'origin': window.location.origin // Allow autoplay across domains
                 },
                 events: {
                     'onReady': onPlayerReady,
