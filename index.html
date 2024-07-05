@@ -57,14 +57,49 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add text shadow for better readability */
         }
 
-        /* Volume Control Styles */
-        .volume-control {
+        /* Control Styles */
+        .controls {
             position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 200px;
+            display: flex;
+            gap: 20px;
             z-index: 2;
+        }
+
+        .volume-control, .skip-button {
+            width: 200px;
+            padding: 10px;
+            background: #111;
+            color: #c0c0ff; /* Purple text color */
+            border: 2px solid #c0c0ff; /* Purple border */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Slight shadow */
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .volume-control::-webkit-slider-thumb {
+            background: #c0c0ff; /* Purple thumb */
+            border: 2px solid #111; /* Dark border */
+            border-radius: 50%;
+        }
+
+        .volume-control::-moz-range-thumb {
+            background: #c0c0ff; /* Purple thumb */
+            border: 2px solid #111; /* Dark border */
+            border-radius: 50%;
+        }
+
+        .volume-control::-ms-thumb {
+            background: #c0c0ff; /* Purple thumb */
+            border: 2px solid #111; /* Dark border */
+            border-radius: 50%;
+        }
+
+        .skip-button:hover {
+            background: #9b30ff; /* Lighter purple on hover */
         }
     </style>
 </head>
@@ -75,7 +110,10 @@
     <div class="text-content">
         <h1>Welcome BitHead</h1>
     </div>
-    <input type="range" class="volume-control" min="0" max="100" value="50" id="volume-slider">
+    <div class="controls">
+        <input type="range" class="volume-control" min="0" max="100" value="50" id="volume-slider">
+        <button class="skip-button" id="skip-button">Skip</button>
+    </div>
 
     <script>
         // Load the IFrame Player API code asynchronously.
@@ -134,6 +172,32 @@
                 var newVolume = volumeSlider.value;
                 player.setVolume(newVolume);
             });
+
+            // Get skip button and set up event listener
+            var skipButton = document.getElementById('skip-button');
+            skipButton.addEventListener('click', function() {
+                player.loadVideoById(getRandomVideo());
+            });
+        }
+
+        // Function to get a random video URL (moved outside onYouTubeIframeAPIReady for skip function)
+        function getRandomVideo() {
+            const videos = [
+                "rAHcYCf_kGc",
+                "D-lvdwOnMEU",
+                "qs9OzrkoLjs",
+                "svlzfK6EiAE",
+                "I18fNYNS4GA",
+                "fudsUhWAG_o",
+                "b8syt3hvu00",
+                "fmq39rSBi6g",
+                "OeLQOfb6IBU",
+                "9Pqo7TqmcXg",
+                "ZQRsDx11pCg",
+                "7b43XXLmDz8"
+            ];
+            const randomIndex = Math.floor(Math.random() * videos.length);
+            return videos[randomIndex];
         }
     </script>
 </body>
