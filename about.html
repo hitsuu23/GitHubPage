@@ -22,39 +22,6 @@
             padding: 0;
         }
 
-        .sidebar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 250px;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #c0c0ff;
-            border-left: 2px solid #c0c0ff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .sidebar h2 {
-            font-size: 24px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .sidebar a {
-            display: block;
-            color: #c0c0ff;
-            text-decoration: none;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
         .content {
             margin-right: 270px;
             padding: 20px;
@@ -72,17 +39,11 @@
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h2>Navigation</h2>
-        <a href="index.html">Home</a>
-        <a href="about.html">About KDMAPPER</a>
-        <a href="static-page.html">Static Page</a>
+    <div class="video-background">
+        <div id="player"></div>
     </div>
+
     <div class="content">
         <h1>About KDMAPPER</h1>
         <p>KDMAPPER is a sophisticated tool for security professionals and researchers to bypass Windows driver signature enforcement. This tool allows you to load unsigned drivers into the kernel space, which can be used for advanced security testing and research.</p>
-        <p>With KDMAPPER, you can inject malicious drivers or bypass certain security restrictions imposed by Windows to perform a variety of penetration tests. However, it is crucial to use KDMAPPER responsibly and only in controlled environments where you have permission to perform security assessments.</p>
-        <p>For more information on how KDMAPPER works, visit the official [KDMAPPER documentation](https://example.com/kdmapper-docs).</p>
-    </div>
-</body>
-</html>
+        <p>With KDMAPPER, you can inject malicious drivers or bypass certain security restrictions imposed by Windows to perform a variety of penetration tests. However, it is crucial to use KDMAPPER responsibly and only in controlled environments where
