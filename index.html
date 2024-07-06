@@ -154,58 +154,13 @@
             border-bottom: none;
         }
 
-        .global-chat {
-            position: absolute;
-            bottom: 100px;
-            right: 0;
-            width: 250px;
-            background-color: rgba(0, 0, 0, 0.7);
+        .sidebar a {
             color: #c0c0ff;
-            border: 2px solid #c0c0ff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            height: 200px;
-            overflow-y: auto;
-            z-index: 2;
+            text-decoration: none;
         }
 
-        .global-chat h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .global-chat .chat-message {
-            margin-bottom: 10px;
-        }
-
-        .global-chat form {
-            margin-top: 10px;
-        }
-
-        .global-chat form input, .global-chat form textarea, .global-chat form button {
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .global-chat form input, .global-chat form textarea {
-            border: 1px solid #c0c0ff;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #c0c0ff;
-        }
-
-        .global-chat form button {
-            background-color: #c0c0ff;
-            color: #111;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .global-chat form button:hover {
-            background-color: #9b30ff;
+        .sidebar a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -220,24 +175,20 @@
         <input type="range" class="volume-control" min="0" max="100" value="50" id="volume-slider">
         <button class="skip-button" id="skip-button">Skip</button>
     </div>
-    <div class="global-chat">
-        <h2>Global Chat</h2>
-        <div id="chat-messages">
-            <!-- Chat messages will go here -->
-        </div>
-        <form id="chat-form">
-            <textarea id="chat-message" placeholder="Type a message..." required></textarea>
-            <button type="submit">Send</button>
-        </form>
-    </div>
     <div class="sidebar">
         <h2>Forum & Categories</h2>
         <div id="post-categories">
-            <!-- Categories will go here -->
+            <!-- Categories -->
+            <div class="post-category"><a href="#">Category 1</a></div>
+            <div class="post-category"><a href="#">Category 2</a></div>
+            <div class="post-category"><a href="#">Category 3</a></div>
         </div>
         <h2>Posts</h2>
         <div id="post-list">
-            <!-- Forum posts will go here -->
+            <!-- Posts -->
+            <div class="post"><a href="#">Post 1</a></div>
+            <div class="post"><a href="#">Post 2</a></div>
+            <div class="post"><a href="#">Post 3</a></div>
         </div>
     </div>
 
@@ -281,14 +232,6 @@
             var currentIndex = videoIds.indexOf(player.getVideoData().video_id);
             var nextIndex = (currentIndex + 1) % videoIds.length;
             player.loadVideoById(videoIds[nextIndex]);
-        });
-
-        // Example Chat Form Handling
-        document.getElementById('chat-form').addEventListener('submit', function (event) {
-            event.preventDefault();
-            var message = document.getElementById('chat-message').value;
-            document.getElementById('chat-messages').innerHTML += '<div class="chat-message">' + message + '</div>';
-            document.getElementById('chat-message').value = '';
         });
     </script>
 </body>
