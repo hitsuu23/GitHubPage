@@ -22,27 +22,6 @@
             padding: 0;
         }
 
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        .video-background iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            object-fit: cover;
-            opacity: 0.6;
-        }
-
         .content {
             margin-right: 270px;
             padding: 20px;
@@ -66,90 +45,5 @@
 
     <div class="content">
         <h1>About KDMAPPER</h1>
-        <p>KDMAPPER is a sophisticated and versatile tool designed for security professionals and researchers who need to bypass the stringent driver signature enforcement mechanisms in Windows operating systems. This tool is part of a broader suite of techniques used to perform advanced security testing, research, and penetration testing. At its core, KDMAPPER facilitates the loading of unsigned drivers into the kernel space, which is typically a restricted area of the operating system that requires signed drivers to ensure security and stability.</p>
-
-        <p>In the realm of cybersecurity, KDMAPPER serves as a critical tool for evaluating the robustness of system defenses against unauthorized kernel-mode code execution. By bypassing the signature enforcement, security experts can test the resilience of systems against potential threats that exploit driver vulnerabilities. This includes exploring methods to inject malicious drivers, assess security controls, and uncover weaknesses that could be exploited by attackers.</p>
-
-        <p>One notable application of KDMAPPER is in the world of video game hacking, particularly in the popular first-person shooter game, Counter-Strike: Global Offensive (CS:GO). In the gaming community, KDMAPPER has been used to develop and deploy cheat modules and hacks that give players unfair advantages. These cheats often include features such as aimbots, wallhacks, and other forms of unfair play that are prohibited by the game’s terms of service.</p>
-
-        <p>For example, by utilizing KDMAPPER, hackers can inject custom drivers that manipulate game data, alter game mechanics, or bypass anti-cheat measures implemented by game developers. These drivers can modify the game’s behavior at a low level, potentially allowing for actions such as automatic aiming, revealing hidden players, or altering game physics. Such cheats undermine the integrity of the game and disrupt the fair play experience for other players.</p>
-
-        <p>It is essential to understand the implications of using KDMAPPER in contexts like game hacking. While the technical capabilities of the tool are impressive and showcase the power of kernel-mode manipulation, using KDMAPPER for malicious purposes is unethical and illegal. Engaging in activities that violate the terms of service of games, or any other software, can result in severe consequences including legal actions, bans, and damage to one’s reputation.</p>
-
-        <p>However, KDMAPPER’s design and functionality also highlight important lessons for the cybersecurity field. It serves as a reminder of the importance of robust security measures and the constant need for vigilance against potential threats. Security professionals can use the knowledge gained from studying tools like KDMAPPER to enhance their own defensive strategies, develop better security protocols, and contribute to a safer and more secure digital environment.</p>
-
-        <p>In summary, KDMAPPER is a powerful tool with significant implications for both cybersecurity research and game hacking. Its ability to bypass Windows’ driver signature enforcement opens up a range of possibilities for both legitimate security assessments and malicious activities. While the tool itself is neutral, the ethics and legality of its use depend on the intentions and actions of those who wield it. Understanding the balance between ethical hacking and malicious exploitation is crucial for anyone working in the field of cybersecurity.</p>
-    </div>
-
-    <script>
-        // Load the IFrame Player API code asynchronously
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
-        var videoIds = [
-            "gdEe_lXsULg", "ZwGn7CDhiGs", "ZQRsDx11pCg", "DbSfsdS7lkw", "azoQ9gSJ-60", "1kp4Tnv8B7E", 
-            "H1SguK7rSTM", "4eNxIZrq9U4", "WYS2PMgCfRE", "SV4k2XNS0tE", "S_KWsUR08P8", "hWp7IjONZCM", 
-            "ZwGn7CDhiGs", "gdEe_lXsULg", "x65yxfRo6rM", "I4jh4ojwSoM", "azoQ9gSJ-60", "EcImU26ThN4", 
-            "1kp4Tnv8B7E", "DbSfsdS7lkw", "-P9U7nDbr0A", "Cqfrffq81sU", "csa8ry5sgIs", "WvV5TbJc9tQ", 
-            "1kp4Tnv8B7E", "ZwGn7CDhiGs", "8erv9o7A7mg", "uuy9oJmfFK8", "e0ACFFptjj0"
-        ];
-
-        function getRandomVideoId() {
-            var randomIndex = Math.floor(Math.random() * videoIds.length);
-            return videoIds[randomIndex];
-        }
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '100%',
-                width: '100%',
-                videoId: getRandomVideoId(),
-                playerVars: {
-                    'autoplay': 1, // Start the video automatically
-                    'controls': 0,
-                    'loop': 0,
-                    'playlist': videoIds.join(','), // Include all video IDs for looping
-                    'rel': 0,
-                    'showinfo': 0,
-                    'mute': 1 // Mute the video initially
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            event.target.setVolume(50);
-
-            var volumeSlider = document.getElementById('volume-slider');
-            volumeSlider.addEventListener('input', function() {
-                var newVolume = volumeSlider.value;
-                player.setVolume(newVolume);
-            });
-
-            var skipButton = document.getElementById('skip-button');
-            skipButton.addEventListener('click', function() {
-                playNextVideo();
-            });
-
-            // Ensure the volume slider is updated to reflect the initial volume
-            volumeSlider.value = 50;
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data === YT.PlayerState.ENDED) {
-                playNextVideo();
-            }
-        }
-
-        function playNextVideo() {
-            player.loadVideoById(getRandomVideoId());
-        }
-    </script>
-</body>
-</html>
+        <p>KDMAPPER is a sophisticated tool for security professionals and researchers to bypass Windows driver signature enforcement. This tool allows you to load unsigned drivers into the kernel space, which can be used for advanced security testing and research.</p>
+        <p>With KDMAPPER, you can inject malicious drivers or bypass certain security restrictions imposed by Windows to perform a variety of penetration tests. However, it is crucial to use KDMAPPER responsibly and only in controlled environments where
