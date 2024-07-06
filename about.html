@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About KDMAPPER</title>
+    <link rel="icon" href="https://example.com/favicon.ico">
+    <style>
+        @font-face {
+            font-family: 'Old English Text MT';
+            src: url('https://example.com/path-to-your-font/OldEnglishTextMT.woff2') format('woff2'),
+                 url('https://example.com/path-to-your-font/OldEnglishTextMT.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
 
+        body {
+            font-family: 'Old English Text MT', 'Blackletter', 'Courier New', Courier, monospace;
+            background-color: #000;
+            color: #c0c0ff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #c0c0ff;
+            border-left: 2px solid #c0c0ff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #c0c0ff;
+            text-decoration: none;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .content {
+            margin-right: 270px;
+            padding: 20px;
+        }
+
+        .content h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Navigation</h2>
+        <a href="index.html">Home</a>
+        <a href="about.html">About KDMAPPER</a>
+        <a href="static-page.html">Static Page</a>
+    </div>
+    <div class="content">
+        <h1>About KDMAPPER</h1>
+        <p>KDMAPPER is a tool used to bypass certain security features of Windows systems by providing a way to load unsigned drivers into kernel mode. This can be useful for penetration testing and security research. It works by mapping a driver into memory and then performing a series of actions to make the system accept it as a valid driver. This tool is used for various security research purposes and should only be used in controlled environments.</p>
+        <p>For more detailed information, you can refer to the official [KDMAPPER documentation](https://example.com/kdmapper-docs).</p>
+    </div>
+</body>
+</html>
