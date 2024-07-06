@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome BitHead</title>
+    <title>Black Hat Rust Hacking</title>
     <link rel="icon" href="https://example.com/favicon.ico">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -12,110 +12,16 @@
         <div id="player"></div>
     </div>
     <div class="text-content">
-        <h1>Welcome BitHead</h1>
+        <h1>Welcome to Black Hat Rust Hacking</h1>
+        <p>Explore the dark side of cybersecurity with Rust. Learn about black hat techniques, tools, and the ethics behind hacking.</p>
     </div>
-    <div class="controls">
-        <input type="range" class="volume-control" min="0" max="100" value="50" id="volume-slider">
-        <button class="skip-button" id="skip-button">Skip</button>
+    <div class="nav-links">
+        <a href="blackhat-rust.html">Black Hat Hacking with Rust</a>
+        <a href="advanced-techniques.html">Advanced Techniques</a>
+        <a href="ethics.html">Ethics and Responsibilities</a>
+        <a href="resources.html">Resources</a>
+        <a href="about.html">About Us</a>
     </div>
-    <div class="sidebar">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="kdmapper.html">About KDMAPPER</a></li>
-        </ul>
-    </div>
-    <div class="content">
-        <h2>Forum</h2>
-        <form id="post-form">
-            <input type="text" id="post-title" placeholder="Title" required>
-            <textarea id="post-content" placeholder="Content" required></textarea>
-            <button type="submit">Post</button>
-        </form>
-        <div id="forum-posts">
-            <!-- Forum posts will go here -->
-        </div>
-    </div>
-
-    <script>
-        // Load the IFrame Player API code asynchronously
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
-        var videoIds = [
-            "gdEe_lXsULg", "ZwGn7CDhiGs", "ZQRsDx11pCg", "DbSfsdS7lkw", "azoQ9gSJ-60", "1kp4Tnv8B7E", 
-            "H1SguK7rSTM", "4eNxIZrq9U4", "WYS2PMgCfRE", "SV4k2XNS0tE", "S_KWsUR08P8", "hWp7IjONZCM", 
-            "ZwGn7CDhiGs", "gdEe_lXsULg", "x65yxfRo6rM", "I4jh4ojwSoM", "azoQ9gSJ-60", "EcImU26ThN4", 
-            "1kp4Tnv8B7E", "DbSfsdS7lkw", "-P9U7nDbr0A", "Cqfrffq81sU", "csa8ry5sgIs", "WvV5TbJc9tQ", 
-            "1kp4Tnv8B7E", "ZwGn7CDhiGs", "8erv9o7A7mg", "uuy9oJmfFK8", "e0ACFFptjj0"
-        ];
-
-        function getRandomVideoId() {
-            var randomIndex = Math.floor(Math.random() * videoIds.length);
-            return videoIds[randomIndex];
-        }
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '100%',
-                width: '100%',
-                videoId: getRandomVideoId(),
-                playerVars: {
-                    'autoplay': 1, // Start the video automatically
-                    'controls': 0,
-                    'loop': 0,
-                    'playlist': videoIds.join(','), // Include all video IDs for looping
-                    'rel': 0,
-                    'showinfo': 0,
-                    'mute': 1 // Mute the video initially
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            event.target.setVolume(50);
-
-            var volumeSlider = document.getElementById('volume-slider');
-            volumeSlider.addEventListener('input', function() {
-                var newVolume = volumeSlider.value;
-                player.setVolume(newVolume);
-            });
-
-            var skipButton = document.getElementById('skip-button');
-            skipButton.addEventListener('click', function() {
-                playNextVideo();
-            });
-
-            // Ensure the volume slider is updated to reflect the initial volume
-            volumeSlider.value = 50;
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data === YT.PlayerState.ENDED) {
-                playNextVideo();
-            }
-        }
-
-        function playNextVideo() {
-            player.loadVideoById(getRandomVideoId());
-        }
-
-        // Forum Post Form
-        document.getElementById('post-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const title = document.getElementById('post-title').value;
-            const content = document.getElementById('post-content').value;
-            const postElement = document.createElement('div');
-            postElement.classList.add('post');
-            postElement.innerHTML = `<h3>${title}</h3><p>${content}</p>`;
-            document.getElementById('forum-posts').appendChild(postElement);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
