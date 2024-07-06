@@ -12,9 +12,107 @@
         <div id="player"></div>
     </div>
     <div class="text-content">
-        <h1>KDMAPPER</h1>
+        <h1>KDMAPPER: Advanced Tool for Windows Security Research</h1>
     </div>
     <div class="toolbar">
         <a href="index.html">Home</a>
         <a href="kdmapper.html" class="active">KDMAPPER</a>
-        <a href="
+        <a href="black-hat-hacking.html">Black Hat Hacking</a>
+        <a href="about.html">About</a>
+    </div>
+
+    <div class="content">
+        <section class="section">
+            <h2>What is KDMAPPER?</h2>
+            <p>KDMAPPER is a sophisticated tool designed for security professionals and researchers. Its primary function is to bypass Windows driver signature enforcement, allowing the injection of unsigned drivers into kernel space. This tool is crucial for advanced security testing and research, especially for those exploring vulnerabilities within the Windows operating system.</p>
+        </section>
+        <section class="section">
+            <h2>How KDMAPPER Works</h2>
+            <p>KDMAPPER leverages the capabilities of the Windows kernel to load unsigned drivers by bypassing the driver signature verification process. It does so by exploiting kernel-mode programming techniques to inject malicious or experimental drivers into the Windows kernel. This functionality is useful for testing the robustness of security measures and for developing new security tools.</p>
+        </section>
+        <section class="section">
+            <h2>KDMAPPER and Game Hacking</h2>
+            <p>In the realm of game hacking, KDMAPPER is often used to load cheat modules into games like Counter-Strike: Global Offensive (CSGO). Hackers use KDMAPPER to circumvent game security mechanisms that prevent the loading of unsigned drivers. By using KDMAPPER, hackers can inject cheats or modifications into the game’s memory, altering gameplay or gaining unfair advantages.</p>
+        </section>
+        <section class="section">
+            <h2>Ethical Considerations</h2>
+            <p>While KDMAPPER provides powerful capabilities for security research and game hacking, it is essential to use this tool responsibly. Unauthorized use of KDMAPPER for malicious purposes, such as creating cheats for online games or conducting unauthorized penetration tests, is illegal and unethical. Security professionals must adhere to legal and ethical guidelines when utilizing tools like KDMAPPER in their research.</p>
+        </section>
+        <section class="section">
+            <h2>Conclusion</h2>
+            <p>KDMAPPER is a valuable tool for those involved in security research and game hacking. Understanding its capabilities and limitations is crucial for effectively utilizing it in both ethical and research contexts. For security researchers, KDMAPPER offers a means to test and develop new security measures, while for hackers, it represents a way to bypass game security measures. Regardless of the application, users must always prioritize ethical practices and legal compliance.</p>
+        </section>
+    </div>
+
+    <script>
+        // Load the IFrame Player API code asynchronously
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var videoIds = [
+            "gdEe_lXsULg", "ZwGn7CDhiGs", "ZQRsDx11pCg", "DbSfsdS7lkw", "azoQ9gSJ-60", "1kp4Tnv8B7E", 
+            "H1SguK7rSTM", "4eNxIZrq9U4", "WYS2PMgCfRE", "SV4k2XNS0tE", "S_KWsUR08P8", "hWp7IjONZCM", 
+            "ZwGn7CDhiGs", "gdEe_lXsULg", "x65yxfRo6rM", "I4jh4ojwSoM", "azoQ9gSJ-60", "EcImU26ThN4", 
+            "1kp4Tnv8B7E", "DbSfsdS7lkw", "-P9U7nDbr0A", "Cqfrffq81sU", "csa8ry5sgIs", "WvV5TbJc9tQ", 
+            "1kp4Tnv8B7E", "ZwGn7CDhiGs", "8erv9o7A7mg", "uuy9oJmfFK8", "e0ACFFptjj0"
+        ];
+
+        function getRandomVideoId() {
+            var randomIndex = Math.floor(Math.random() * videoIds.length);
+            return videoIds[randomIndex];
+        }
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                videoId: getRandomVideoId(),
+                playerVars: {
+                    'autoplay': 1, // Start the video automatically
+                    'controls': 0,
+                    'loop': 0,
+                    'playlist': videoIds.join(','), // Include all video IDs for looping
+                    'rel': 0,
+                    'showinfo': 0,
+                    'mute': 1 // Mute the video initially
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.setVolume(50);
+
+            var volumeSlider = document.getElementById('volume-slider');
+            volumeSlider.addEventListener('input', function() {
+                var newVolume = volumeSlider.value;
+                player.setVolume(newVolume);
+            });
+
+            var skipButton = document.getElementById('skip-button');
+            skipButton.addEventListener('click', function() {
+                playNextVideo();
+            });
+
+            // Ensure the volume slider is updated to reflect the initial volume
+            volumeSlider.value = 50;
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                playNextVideo();
+            }
+        }
+
+        function playNextVideo() {
+            player.loadVideoById(getRandomVideoId());
+        }
+    </script>
+</body>
+</html>
