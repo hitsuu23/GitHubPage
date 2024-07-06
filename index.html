@@ -171,6 +171,51 @@
         .hide {
             display: none;
         }
+
+        .chat {
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #c0c0ff;
+            border-radius: 8px;
+            padding: 20px;
+            height: 30vh;
+            overflow-y: auto;
+        }
+
+        .chat .message {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-bottom: 1px solid #c0c0ff;
+        }
+
+        .chat .message:last-child {
+            border-bottom: none;
+        }
+
+        .chat form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat form input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #c0c0ff;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #c0c0ff;
+        }
+
+        .chat form button {
+            background-color: #c0c0ff;
+            color: #111;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .chat form button:hover {
+            background-color: #9b30ff;
+        }
     </style>
 </head>
 <body>
@@ -185,15 +230,14 @@
         <button class="skip-button" id="skip-button">Skip</button>
     </div>
     <div class="forum">
-        <h2></h2>
-        <form id="post-form">
-            <input type="text" id="post-title" placeholder="Title" required>
-            <textarea id="post-content" placeholder="Content" required></textarea>
-            <button type="submit">Post</button>
-        </form>
-        <div id="forum-posts">
-            <!-- Forum posts will go here -->
+        <h2>Global Chat</h2>
+        <div class="chat" id="chat">
+            <!-- Chat messages will go here -->
         </div>
+        <form id="chat-form">
+            <input type="text" id="chat-message" placeholder="Type your message" required>
+            <button type="submit">Send</button>
+        </form>
     </div>
 
     <script>
@@ -265,21 +309,24 @@
             player.loadVideoById(getRandomVideoId());
         }
 
-        // Handle forum post submission
-        document.getElementById('post-form').addEventListener('submit', function(event) {
+        // WebSocket Setup
+        const ws = new WebSocket('ws://localhost:3000');
+
+        ws.addEventListener('message', (event) => {
+            const chat = document.getElementById('chat');
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message';
+            messageElement.textContent = event.data;
+            chat.appendChild(messageElement);
+            chat.scrollTop = chat.scrollHeight;
+        });
+
+        document.getElementById('chat-form').addEventListener('submit', (event) => {
             event.preventDefault();
-
-            var title = document.getElementById('post-title').value;
-            var content = document.getElementById('post-content').value;
-
-            var postElement = document.createElement('div');
-            postElement.className = 'post';
-            postElement.innerHTML = '<h3>' + title + '</h3><p>' + content + '</p>';
-
-            document.getElementById('forum-posts').appendChild(postElement);
-
-            document.getElementById('post-title').value = '';
-            document.getElementById('post-content').value = '';
+            const messageInput = document.getElementById('chat-message');
+            const message = messageInput.value;
+            ws.send(message);
+            messageInput.value = '';
         });
     </script>
 </body>
