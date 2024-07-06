@@ -1,24 +1,16 @@
-@font-face {
-    font-family: 'Old English Text MT';
-    src: url('https://example.com/path-to-your-font/OldEnglishTextMT.woff2') format('woff2'),
-         url('https://example.com/path-to-your-font/OldEnglishTextMT.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+/* styles.css */
 
 body {
-    font-family: 'Old English Text MT', 'Blackletter', 'Courier New', Courier, monospace;
     margin: 0;
     padding: 0;
-    background-color: #000;
-    color: #c0c0ff;
-    overflow: hidden;
-    height: 100vh;
-    position: relative;
+    font-family: 'Old English Text MT', 'Blackletter', serif;
+    color: #fff;
+    background: #000; /* Fallback color */
+    background: linear-gradient(to bottom right, #111, #222); /* Subtle gradient for depth */
 }
 
 .video-background {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -27,108 +19,111 @@ body {
     z-index: -1;
 }
 
-.video-background iframe {
+#player {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    border: none;
-    object-fit: cover;
-    opacity: 0.6;
 }
 
 .text-content {
     position: absolute;
-    top: 20px;
-    width: 100%;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
     text-align: center;
-    z-index: 1;
 }
 
 .text-content h1 {
-    font-size: 48px;
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-size: 3em;
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
 }
 
 .controls {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
-    z-index: 2;
+    align-items: center;
 }
 
-.volume-control, .skip-button {
-    width: 100px;
-    padding: 10px;
-    background: #111;
-    color: #c0c0ff;
-    border: 2px solid #c0c0ff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    font-size: 18px;
+.volume-control {
+    margin-right: 20px;
     cursor: pointer;
 }
 
-.volume-control::-webkit-slider-thumb {
-    background: #c0c0ff;
-    border: 2px solid #111;
-    border-radius: 50%;
-}
-
-.volume-control::-moz-range-thumb {
-    background: #c0c0ff;
-    border: 2px solid #111;
-    border-radius: 50%;
-}
-
-.volume-control::-ms-thumb {
-    background: #c0c0ff;
-    border: 2px solid #111;
-    border-radius: 50%;
+.skip-button {
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .skip-button:hover {
-    background: #9b30ff;
+    background: #cc0000;
 }
 
-/* Toolbar Styles */
 .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    flex-direction: column;
-    background: #111;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 800px;
     padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .toolbar a {
-    color: #c0c0ff;
+    color: #fff;
     text-decoration: none;
-    margin: 10px 0;
-    font-size: 24px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
 }
 
+.toolbar a.active,
 .toolbar a:hover {
-    color: #9b30ff;
+    background: rgba(255, 255, 255, 0.4);
 }
 
-.toolbar a.active {
-    font-weight: bold;
+.content {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2em;
     color: #ffcc00;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
 }
 
-.toolbar a:active {
-    color: #ff9900;
+p, ul {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
 }
