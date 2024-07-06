@@ -191,12 +191,13 @@
                 width: '100%',
                 videoId: getRandomVideoId(),
                 playerVars: {
-                    'autoplay': 1,
+                    'autoplay': 1, // Start the video automatically
                     'controls': 0,
                     'loop': 0,
-                    'playlist': videoIds.join(','),
+                    'playlist': videoIds.join(','), // Include all video IDs for looping
                     'rel': 0,
-                    'showinfo': 0
+                    'showinfo': 0,
+                    'mute': 1 // Mute the video initially
                 },
                 events: {
                     'onReady': onPlayerReady,
