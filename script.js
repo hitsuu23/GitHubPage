@@ -1,18 +1,31 @@
-const player = document.getElementById('player');
+let player;
 
-const videos = [
-    'https://www.youtube.com/embed/VIDEO_ID_1',
-    'https://www.youtube.com/embed/VIDEO_ID_2',
-    'https://www.youtube.com/embed/VIDEO_ID_3',
-    'https://www.youtube.com/embed/VIDEO_ID_4'
-];
-
-let currentVideoIndex = 0;
-
-function loadVideo() {
-    player.innerHTML = `<iframe src="${videos[currentVideoIndex]}?autoplay=1&loop=1&playlist=${videos[currentVideoIndex].split('/')[4]}&mute=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-    currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('background-video', {
+        videoId: 'EOzAP96tgE4',
+        playerVars: {
+            autoplay: 1,
+            loop: 1,
+            playlist: 'EOzAP96tgE4',
+            controls: 0,
+            showinfo: 0,
+            modestbranding: 1,
+            mute: 1,
+            start: 156,
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
 }
 
-loadVideo();
-setInterval(loadVideo, 60000);  // Change video every minute
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+
+function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.ENDED) {
+        player.seekTo(156);
+    }
+}
